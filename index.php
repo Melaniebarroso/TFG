@@ -31,7 +31,7 @@ if (in_array(explode('/', $route)[0], $restricted_dirs)) {
 
 // Manejo de rutas
 if ($route === '') {
-    $content = 'indice.php'; //Aquí incluir la página de login
+    $content = 'home.html'; //Aquí incluir la página de login
 } elseif (strpos($route, 'api/') === 0) {
     // Si es una llamada a la API, procesarla sin cargar HTML
     $api_route = str_replace('api/', '', $route); // Quitamos "api/" pensar que / y archivo tiene que ser lo mismo

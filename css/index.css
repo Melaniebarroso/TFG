@@ -1,0 +1,10 @@
+@font-face {
+    font-family: "Title";
+    src: url('../fonts/Humane-Medium.woff');
+    font-family: "Principal";
+    src: url('../fonts/Nunito-VariableFont_wght.woff');
+}
+
+h1 {
+    font-family: "Title", "Principal";
+}
