@@ -8,9 +8,9 @@
 </head>
 <body>
     <header>
-        <h1>Titulo</h1>
+        <h1>La Tará</h1>
         <nav>
-            <ul>
+            <ul id="nav-list">
                 <li>Inicio</li>
                 <li>La Tará</li>
                 <li>Educación</li>
@@ -23,3 +23,8 @@
     </header>
 </body>
 </html>
+<script>
+    window.addEventListener("load", () => {
+        document.getElementById("nav-list").classList.add("nav-list-show");
+    });
+</script>
