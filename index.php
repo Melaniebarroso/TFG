@@ -53,31 +53,52 @@ if ($route === '') {
     $content = null;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="copyright" content="Copyright 1999-2024. WebPros International GmbH. All rights reserved.">
-    <!-- Aquí incluir lo que va a ser común en todas las páginas
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
-    <style>
-        body {
-            font-family: "Montserrat";
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-        * {
-            box-sizing: border-box;
-}
-    </style>-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de inicio</title>
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
+    <header>
+        <img width="100px" src="resources/logo.png" class="logo">
+        <nav>
+            <ul id="nav-list">
+                <li>Inicio</li>
+                <li>La Tará</li>
+                <li>Educación</li>
+                <li>Espectáculos</li>
+                <li>Tienda</li>
+                <li>Blog</li>
+                <li>Contacto</li>
+            </ul>
+        </nav>
+        <button class="login">Acceso</button>
+        <button id="theme-toggle" class="theme-toggle">🌙</button>
+    </header>
+</body>
+</html>
+<script>
+    window.addEventListener("load", () => {
+        document.getElementById("nav-list").classList.add("nav-list-show");
+    });
+    
+const toggleButton = document.getElementById("theme-toggle");
+const body = document.body;
+toggleButton.addEventListener("click", () => {
+  body.classList.toggle("dark-mode");
+  if (body.classList.contains("dark-mode")) {
+    localStorage.setItem("theme", "dark");
+    toggleButton.textContent = "☀️";
+  } else {
+    localStorage.setItem("theme", "light");
+    toggleButton.textContent = "🌙";
+  }
+});
+
+</script>
 
 <?php
 // Incluir el contenido si existe

@@ -15,9 +15,23 @@ body {
     font-family: "Principal", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+  }
+.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
 }
 header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #222;
     padding: 15px 0;
     text-align: center;
@@ -60,4 +74,24 @@ nav li:nth-child(7) { transition-delay: 0.7s; }
 .nav-list-show li {
     opacity: 1;
     transform: translateY(0);
+}
+.login {
+    background: yellow;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.login:hover {
+    background: orange;
+}
+.theme-toggle {
+    padding: 0;
+    background-color: none;
+    border: none;
 }
