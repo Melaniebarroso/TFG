@@ -1,154 +1,101 @@
 <style>
-    body {
-        font-family: 'Montserrat';
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f4f4f4;
-    }
-    #particles-js {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
-    .container {
-        width: 100%;
-        max-width: 400px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+@font-face {
+    font-family: "Principal";
+    src: url('../fonts/Nunito-VariableFont_wght.woff');
+}
+@font-face {
+    font-family: 'Title';
+    src: url('../fonts/Humane-Regular.otf') format('woff'),
+         url('../fonts/Humane-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Cursiva';
+    src: url('../fonts/ButterflyKids-Regular.woff') format('woff'),
+}
+body {
+    font-family: "Principal", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+  }
+.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+}
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #222;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    font-family: "Title", "Principal";
+    font-size: 90px;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: white;
+    padding: 0px;
+   
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+nav li {
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+nav li:hover {
+    color: yellow;
+}
+nav li:nth-child(1) { transition-delay: 0.1s; }
+nav li:nth-child(2) { transition-delay: 0.2s; }
+nav li:nth-child(3) { transition-delay: 0.3s; }
+nav li:nth-child(4) { transition-delay: 0.4s; }
+nav li:nth-child(5) { transition-delay: 0.5s; }
+nav li:nth-child(6) { transition-delay: 0.6s; }
+nav li:nth-child(7) { transition-delay: 0.7s; }
+.nav-list-show li {
+    opacity: 1;
+    transform: translateY(0);
+}
+.login {
+    background: yellow;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
 
-    .login_form {
-        width: 100%;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        align-items: left;
-        padding: 50px;
-    
-    }
-    .login_form .logo {
-        align-self: center;
-        max-width: 140px;
-        margin-bottom: 40px;
-    }
-    .login_form label {
-        color: rgb(68, 68, 68);
-        text-align: left;
-        width: 100%;
-    }
-    .login_form input {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-        margin-bottom: 25px;
-    }
-
-    .login_form button {
-        width: 100%;
-        padding: 10px;
-        background-color: black;
-        border: none;
-        margin: 0px;
-        border-radius: 5px;
-        color: white;
-        margin-top: 10px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .login_form button:hover {
-        background-color: gray;
-        color: black;
-    }
-    .popup {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        justify-content: center;
-        align-items: center;
-    }
-    .popup-container {
-        width: 100%;
-        max-width: 400px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex
-        z-index: 999;
-    }
-    .popup-container form {
-        width: 100%;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        align-items: left;
-        padding: 50px 50px 50px 50px;
-    }
-    .popup-container form .logo {
-        align-self: center;
-        max-width: 140px;
-        margin-bottom: 40px;
-    }
-    .popup-container form label {
-        color: gray;
-        text-align: left;
-        width: 100%;
-    }
-    .popup-container form input {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-        margin-bottom: 25px;
-    }
-    .popup-container form button {
-        width: 100%;
-        padding: 10px;
-        background-color: black;
-        border: none;
-        margin: 0px;
-        border-radius: 5px;
-        color: white;
-        margin-top: 10px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    .spinner {
-        border: 4px solid rgba(255, 255, 255, 0.3);
-        border-top: 4px solid #3498db;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        animation: spin 1s linear infinite;
-        z-index: 1000;
-        position: absolute;
-        top:50%;
-        left:50%;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
+.login:hover {
+    background: orange;
+}
+.theme-toggle {
+    padding: 0;
+    background-color: none;
+    border: none;
+}
 </style>
     <div id="particles-js"></div>
     <div class="container">

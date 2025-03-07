@@ -1,0 +1,7 @@
+<style>
+    h1 {
+        font-family: "Title";
+    }
+</style>
+<h1>404</h1>
+<h1>Página no encontrada</h1>
