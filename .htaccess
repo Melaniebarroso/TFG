@@ -1,0 +1,22 @@
+#RewriteEngine On
+
+# Redirigir todo a index.php (sin importar si es carpeta o archivo)
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
+
+
+RewriteEngine On
+
+# Si la URL apunta a un directorio pero no tiene '/', redirigir agregando '/'
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !/$
+RewriteRule (.*) %{REQUEST_URI}/ [R=301,L]
+
+# Redirigir todas las solicitudes a index.php para manejar rutas
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
+
+# Redirigir las rutas relacionadas con resetPassword a reset_password.php
+# RewriteCond %{REQUEST_URI} ^/resetPassword/?$
+# RewriteCond %{QUERY_STRING} reset_key=([^&]+)
+# RewriteRule ^resetPassword/?$ /resetPassword/reset_password.php?reset_key=%1 [L]
