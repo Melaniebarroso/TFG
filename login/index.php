@@ -1,16 +1,16 @@
 <style>
 @font-face {
     font-family: "Principal";
-    src: url('../fonts/Nunito-VariableFont_wght.woff');
+    src: url('../resources/fonts/Nunito-VariableFont_wght.woff');
 }
 @font-face {
     font-family: 'Title';
-    src: url('../fonts/Humane-Regular.otf') format('woff'),
-         url('../fonts/Humane-Regular.woff2') format('woff2');
+    src: url('../resources/fonts/Humane-Regular.otf') format('woff'),
+         url('../resources/fonts/Humane-Regular.woff2') format('woff2');
 }
 @font-face {
     font-family: 'Cursiva';
-    src: url('../fonts/ButterflyKids-Regular.woff') format('woff'),
+    src: url('../resources/fonts/ButterflyKids-Regular.woff') format('woff'),
 }
 body {
     font-family: "Principal", sans-serif;
