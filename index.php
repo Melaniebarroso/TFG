@@ -312,7 +312,7 @@ if ($route === '') {
 
 </html>
 <script>
-    fetch('../particlesjs-config.json')
+    fetch('particlesjs-config.json')
       .then(response => response.json())
       .then(config => {
         particlesJS('particles-js', config);
