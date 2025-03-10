@@ -31,7 +31,7 @@ if (in_array(explode('/', $route)[0], $restricted_dirs)) {
 
 // Manejo de rutas
 if ($route === '') {
-    $content = 'home.html'; //Aquí incluir la página de login
+    $content = 'home.php'; //Aquí incluir la página de login
 } elseif (strpos($route, 'api/') === 0) {
     // Si es una llamada a la API, procesarla sin cargar HTML
     $api_route = str_replace('api/', '', $route); // Quitamos "api/" pensar que / y archivo tiene que ser lo mismo
@@ -178,6 +178,16 @@ nav li:nth-child(7) { transition-delay: 0.7s; }
         <button class="login">Acceso</button>
         <button id="theme-toggle" class="theme-toggle">🌙</button>
     </header>
+    <div class="login-popup">
+        <div class="popup-container">
+            <form>
+                <input placeholder="Correo electrónico" id="login-email" class="input-login" type="password" required>
+                <input placeholder="Contraseña" id="login-password" class="input-login" type="email" required>
+                <button type="submit">Enviar</button>
+                <div id="login-message"></div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
 <script>
