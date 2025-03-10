@@ -1,4 +1,8 @@
 <?php
+//require_once 'jwt/composer.json'; //Para cargar la librería JWT
+use \jwt\JWT;
+use \jwt\Key;
+
 $route = isset($_GET['route']) ? trim($_GET['route'], '/') : '';
 
 //Si la ruta no es login ni restablecer contraseña verificamos el token
@@ -173,7 +177,9 @@ if ($route === '') {
         opacity: 1;
         transform: translateY(0);
     }
-
+    .logo {
+        max-width: 90px;
+    }
     .login {
         background: yellow;
         color: black;
@@ -230,7 +236,7 @@ if ($route === '') {
 
     #login-popup .popup-container form .logo {
         align-self: center;
-        max-width: 140px;
+        max-width: 80px;
         margin-bottom: 20px;
     }
 
@@ -267,7 +273,7 @@ if ($route === '') {
 
 <body>
     <header>
-        <img width="100px" src="resources/logo.png" class="logo">
+        <img src="resources/img/logo.png" class="logo">
         <nav>
             <ul id="nav-list">
                 <li>Inicio</li>
@@ -285,6 +291,7 @@ if ($route === '') {
     <div class="login-popup" id="login-popup">
         <div class="popup-container">
             <form>
+                <img src="resources/img/logo.png" class="logo">
                 <input placeholder="Correo electrónico" id="login-email" class="input-login" type="password" required>
                 <input placeholder="Contraseña" id="login-password" class="input-login" type="email" required>
                 <button type="submit">Enviar</button>
