@@ -1,3 +1,6 @@
+<?php
+include("plantillas/header.php")
+?>
 <style>
     h1 {
         font-family: "Title";

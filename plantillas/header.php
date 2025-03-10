@@ -1,61 +1,3 @@
-<?php
-use \JWT\JWT;
-use \JWT\Key;
-
-$route = isset($_GET['route']) ? trim($_GET['route'], '/') : '';
-
-//Si la ruta no es login ni restablecer contraseña verificamos el token
-if ($route != '' && !str_contains($route, "resetPassword") && !str_contains($route, "api")) {
-    $jwt = $_COOKIE['user_cookie'] ?? null;
-    if ($jwt) {
-        try {
-            $secret_key = "1234";
-            $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
-            $admin = $decoded->userId;
-        } catch (Exception $e) {
-            header("Location: /"); //Aquí si hay algún fallo con el token te redirige a la página de login directamente y cuando pase x tiempo
-            error_log($e);
-            exit; //Obligatorio
-        }
-    } else {
-        header("Location: /"); // Aquí lo mismo
-        error_log("Error");
-        exit;
-    }
-}
-// Aquí tendremos que definir las rutas restringidas
-$restricted_dirs = ['assets', 'uploads', 'css', 'js'];
-
-// Evitar acceso a carpetas restringidas
-if (in_array(explode('/', $route)[0], $restricted_dirs)) {
-    http_response_code(403);
-    die("Acceso denegado.");
-}
-
-// Manejo de rutas
-if ($route === '') {
-    $content = 'home.php'; //Aquí incluir la página de login
-} elseif (strpos($route, 'api/') === 0) {
-    // Si es una llamada a la API, procesarla sin cargar HTML
-    $api_route = str_replace('api/', '', $route); // Quitamos "api/" pensar que / y archivo tiene que ser lo mismo
-    if (is_dir("api/$api_route") && file_exists("api/$api_route/index.php")) {
-        include "api/$api_route/index.php";
-    } elseif (file_exists("api/$api_route.php")) {
-        include "api/$api_route.php";
-    } else {
-        http_response_code(404);
-        echo "Error 404: API endpoint no encontrado.";
-    }
-    exit; // Detener la ejecución aquí para evitar la carga del HTML
-} elseif (is_dir($route) && file_exists("$route/index.php")) {
-    $content = "$route/index.php";
-} elseif (file_exists("$route.php")) {
-    $content = "$route.php";
-} else {
-    http_response_code(404);
-    $content = null;
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,18 +12,16 @@ if ($route === '') {
 <style>
     @font-face {
         font-family: "Principal";
-        src: url('./resources/fonts/Nunito-VariableFont_wght.woff');
+        src: url('../resources/fonts/Nunito-VariableFont_wght.woff');
     }
-
     @font-face {
         font-family: 'Title';
-        src: url('./resources/fonts/Humane-Regular.otf') format('woff'),
-            url('./resources/fonts/Humane-Regular.woff2') format('woff2');
+        src: url('../resources/fonts/Humane-Regular.otf') format('woff'),
+            url('../resources/fonts/Humane-Regular.woff2') format('woff2');
     }
-
     @font-face {
         font-family: 'Cursiva';
-        src: url('./resources/fonts/ButterflyKids-Regular.woff') format('woff'),
+        src: url('../resources/fonts/ButterflyKids-Regular.woff') format('woff'),
     }
 
     body {
@@ -289,13 +229,13 @@ if ($route === '') {
 
 <body>
     <header>
-        <img src="resources/img/logo.png" class="logo">
+        <img src="../resources/img/logo.png" class="logo">
         <nav>
             <ul id="nav-list">
                 <li><a href="/TFG-1/inicio/">Inicio</a></li>
                 <li><a href="/TFG-1/latara/">La Tará</a></li>
                 <li><a href="/TFG-1/educacion/">Educación</a></li>
-                <li><a href="/TFG-1/espectacuos/">Espectáculos</a></li>
+                <li><a href="/TFG-1/espectaculos/">Espectáculos</a></li>
                 <li><a href="/TFG-1/tienda/">Tienda</a></li>
                 <li><a href="/TFG-1/blog/">Blog</a></li>
                 <li><a href="/TFG-1/contacto/">Contacto</a></li>
@@ -320,7 +260,7 @@ if ($route === '') {
 
 </html>
 <script>
-    fetch('particlesjs-config.json')
+    fetch('../particlesjs-config.json')
             .then(response => response.json())
             .then(config => {
                 particlesJS('particles-js', config);
@@ -337,7 +277,7 @@ if ($route === '') {
         if (body.classList.contains("dark-mode")) {
             localStorage.setItem("theme", "dark");
             toggleButton.textContent = "☀️";
-            fetch('particlesjs-dark-config.json')
+            fetch('../particlesjs-dark-config.json')
             .then(response => response.json())
             .then(config => {
                 particlesJS('particles-js', config);
@@ -346,7 +286,7 @@ if ($route === '') {
         } else {
             localStorage.setItem("theme", "light");
             toggleButton.textContent = "🌙";
-            fetch('particlesjs-config.json')
+            fetch('../particlesjs-config.json')
             .then(response => response.json())
             .then(config => {
                 particlesJS('particles-js', config);
@@ -366,16 +306,3 @@ if ($route === '') {
         }
     });
 </script>
-
-<?php
-// Incluir el contenido si existe
-if ($content) {
-    include $content;
-} else {
-    include '404.php'; 
-    //header("Location: 404.php");
-}
-?>
-
-</body>
-</html>

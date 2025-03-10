@@ -1,12 +1,11 @@
 RewriteEngine On
-RewriteBase /TFG-1/
 
 # Si la URL apunta a un directorio pero no tiene '/', redirigir agregando '/'
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteCond %{REQUEST_URI} !/$
-RewriteRule (.*) %{REQUEST_URI}/ [R=301,L]
+RewriteRule ^(.*)$ /$1/ [R=301,L]  # Añadir '/' al final si es un directorio
 
-# Si la URL NO es un archivo real, redirigir a index.php
+# Si la URL NO es un archivo real y no es un directorio, redirigir a index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
+RewriteRule ^(.*)$ /$1/index.php [L]  # Redirigir a index.php para manejar rutas
