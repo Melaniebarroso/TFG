@@ -1,16 +1,19 @@
 RewriteEngine On
 
+# AQUÍ LO CAMBIAREOMOS POR EL FUTURO NOMBRE DEL DOMINIO
+RewriteBase /TFG-1/
+
 # Si la URL apunta a un directorio pero no tiene '/', redirigir agregando '/'
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteCond %{REQUEST_URI} !/$
 RewriteRule (.*) %{REQUEST_URI}/ [R=301,L]
 
-# EXCEPCIÓN para cualquier carpeta dentro del root
-RewriteCond %{REQUEST_URI} ^/(blog|educacion|espectaculos|tienda|contacto)/ [NC]
+# Permitir acceso directo a archivos y carpetas sin redirección
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]
 
-# Redirigir todas las demás solicitudes al index.php principal
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Redirigir todas las demás solicitudes a index.php
 RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
