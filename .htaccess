@@ -6,13 +6,7 @@ RewriteCond %{REQUEST_FILENAME} -d
 RewriteCond %{REQUEST_URI} !/$
 RewriteRule (.*) %{REQUEST_URI}/ [R=301,L]
 
-# Si la URL es un archivo real, permitir el acceso
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule ^ - [L]
-
-# Si la URL es una carpeta real, permitir el acceso
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-
-# Redirigir todas las demás solicitudes a index.php
+# Si la URL NO es un archivo real, redirigir a index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]

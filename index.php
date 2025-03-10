@@ -289,7 +289,7 @@ if ($route === '') {
                 <li><a href="/TFG-1/educacion/">Educación</a></li>
                 <li><a href="/TFG-1/espectaculos/">Espectáculos</a></li>
                 <li><a href="/TFG-1/tienda/">Tienda</a></li>
-                <li><a href="/TFG-1/pages/blog/">Blog</a></li>
+                <li><a href="/TFG-1/blog/">Blog</a></li>
                 <li><a href="/TFG-1/contacto/">Contacto</a></li>
             </ul>
         </nav>
