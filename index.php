@@ -289,7 +289,7 @@ if ($route === '') {
                 <li>Educación</li>
                 <li>Espectáculos</li>
                 <li>Tienda</li>
-                <li>Blog</li>
+                <li><a href="/blog/">Blog</a></li>
                 <li>Contacto</li>
             </ul>
         </nav>
@@ -313,12 +313,11 @@ if ($route === '') {
 </html>
 <script>
     fetch('particlesjs-config.json')
-      .then(response => response.json())
-      .then(config => {
-        particlesJS('particles-js', config);
-      })
-      .catch(error => console.error("Error al cargar el archivo JSON:", error));
-
+            .then(response => response.json())
+            .then(config => {
+                particlesJS('particles-js', config);
+            })
+            .catch(error => console.error("Error al cargar el archivo JSON:", error));
     window.addEventListener("load", () => {
         document.getElementById("nav-list").classList.add("nav-list-show");
     });
@@ -330,9 +329,21 @@ if ($route === '') {
         if (body.classList.contains("dark-mode")) {
             localStorage.setItem("theme", "dark");
             toggleButton.textContent = "☀️";
+            fetch('particlesjs-dark-config.json')
+            .then(response => response.json())
+            .then(config => {
+                particlesJS('particles-js', config);
+            })
+            .catch(error => console.error("Error al cargar el archivo JSON:", error));
         } else {
             localStorage.setItem("theme", "light");
             toggleButton.textContent = "🌙";
+            fetch('particlesjs-config.json')
+            .then(response => response.json())
+            .then(config => {
+                particlesJS('particles-js', config);
+            })
+            .catch(error => console.error("Error al cargar el archivo JSON:", error));
         }
     });
 
