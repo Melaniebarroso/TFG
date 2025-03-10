@@ -284,13 +284,13 @@ if ($route === '') {
         <img src="resources/img/logo.png" class="logo">
         <nav>
             <ul id="nav-list">
-                <li>Inicio</li>
-                <li>La Tará</li>
-                <li>Educación</li>
-                <li>Espectáculos</li>
-                <li>Tienda</li>
-                <li><a href="/TFG-1/blog/">Blog</a></li>
-                <li>Contacto</li>
+                <li><a href="/TFG-1/inicio/">Inicio</a></li>
+                <li><a href="/TFG-1/latara/">La Tará</a></li>
+                <li><a href="/TFG-1/educacion/">Educación</a></li>
+                <li><a href="/TFG-1/espectaculos/">Espectáculos</a></li>
+                <li><a href="/TFG-1/tienda/">Tienda</a></li>
+                <li><a href="/TFG-1/pages/blog/">Blog</a></li>
+                <li><a href="/TFG-1/contacto/">Contacto</a></li>
             </ul>
         </nav>
         <button class="login" id="login-button">Acceso</button>
@@ -352,7 +352,7 @@ if ($route === '') {
     loginButton.addEventListener("click", function () {
         loginPopup.style.display = 'block';
     })
-    window.addEventListener("click", (event) => { //Si se hace click fuera del popup cerrarlo
+    window.addEventListener("click", (event) => {
         if (event.target === loginPopup) {
             loginPopup.style.display = "none";
         }
