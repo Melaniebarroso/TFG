@@ -1,7 +1,6 @@
 <?php
-//require_once 'jwt/composer.json'; //Para cargar la librería JWT
-use \jwt\JWT;
-use \jwt\Key;
+use \JWT\JWT;
+use \JWT\Key;
 
 $route = isset($_GET['route']) ? trim($_GET['route'], '/') : '';
 
@@ -66,6 +65,7 @@ if ($route === '') {
     <title>Página de inicio</title>
     <link rel="stylesheet" href="css/index.css">
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script> <!-- Librería JWT -->
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!--Librería particles -->
 </head>
 <style>
     @font-face {
@@ -177,9 +177,11 @@ if ($route === '') {
         opacity: 1;
         transform: translateY(0);
     }
+
     .logo {
         max-width: 90px;
     }
+
     .login {
         background: yellow;
         color: black;
@@ -269,6 +271,12 @@ if ($route === '') {
         cursor: pointer;
         transition: all 0.3s ease;
     }
+    #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
 </style>
 
 <body>
@@ -299,10 +307,18 @@ if ($route === '') {
             </form>
         </div>
     </div>
+    <div id="particles-js"></div>
 </body>
 
 </html>
 <script>
+    fetch('../particlesjs-config.json')
+      .then(response => response.json())
+      .then(config => {
+        particlesJS('particles-js', config);
+      })
+      .catch(error => console.error("Error al cargar el archivo JSON:", error));
+
     window.addEventListener("load", () => {
         document.getElementById("nav-list").classList.add("nav-list-show");
     });
@@ -326,9 +342,9 @@ if ($route === '') {
         loginPopup.style.display = 'block';
     })
     window.addEventListener("click", (event) => { //Si se hace click fuera del popup cerrarlo
-    if (event.target === loginPopup) {
-        loginPopup.style.display = "none";
-    }
+        if (event.target === loginPopup) {
+            loginPopup.style.display = "none";
+        }
     });
 </script>
 
@@ -344,5 +360,4 @@ if ($content) {
 ?>
 
 </body>
-
 </html>
