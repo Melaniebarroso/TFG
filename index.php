@@ -133,15 +133,23 @@ if ($route === '') {
         gap: 20px;
     }
 
-    nav li {
+    nav li{
         color: white;
         cursor: pointer;
         opacity: 0;
         transform: translateY(-20px);
         transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     }
+    nav li a {
+        text-decoration: none;
+        color: white;
+    }
+    nav li a:visited {
+        text-decoration: none;
+        color: white;
+    }
 
-    nav li:hover {
+    nav li a:hover {
         color: yellow;
     }
 
