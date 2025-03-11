@@ -232,13 +232,13 @@
         <img src="../resources/img/logo.png" class="logo">
         <nav>
             <ul id="nav-list">
-                <li><a href="/TFG-1/inicio/">Inicio</a></li>
-                <li><a href="/TFG-1/latara/">La Tará</a></li>
-                <li><a href="/TFG-1/educacion/">Educación</a></li>
-                <li><a href="/TFG-1/espectaculos/">Espectáculos</a></li>
-                <li><a href="/TFG-1/tienda/">Tienda</a></li>
-                <li><a href="/TFG-1/blog/">Blog</a></li>
-                <li><a href="/TFG-1/contacto/">Contacto</a></li>
+                <li><a href="/TFG/inicio/">Inicio</a></li>
+                <li><a href="/TFG/latara/">La Tará</a></li>
+                <li><a href="/TFG/educacion/">Educación</a></li>
+                <li><a href="/TFG/espectaculos/">Espectáculos</a></li>
+                <li><a href="/TFG/tienda/">Tienda</a></li>
+                <li><a href="/TFG/blog/">Blog</a></li>
+                <li><a href="/TFG/contacto/">Contacto</a></li>
             </ul>
         </nav>
         <button class="login" id="login-button">Acceso</button>
@@ -251,6 +251,7 @@
                 <input placeholder="Correo electrónico" id="login-email" class="input-login" type="password" required>
                 <input placeholder="Contraseña" id="login-password" class="input-login" type="email" required>
                 <button type="submit">Enviar</button>
+                <button type="button" id="forgotPasswordBtn">¿Has olvidado tu contraseña?</button>
                 <div id="login-message"></div>
             </form>
         </div>

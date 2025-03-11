@@ -292,13 +292,13 @@ if ($route === '') {
         <img src="resources/img/logo.png" class="logo">
         <nav>
             <ul id="nav-list">
-                <li><a href="/TFG-1/inicio/">Inicio</a></li>
-                <li><a href="/TFG-1/latara/">La Tará</a></li>
-                <li><a href="/TFG-1/educacion/">Educación</a></li>
-                <li><a href="/TFG-1/espectacuos/">Espectáculos</a></li>
-                <li><a href="/TFG-1/tienda/">Tienda</a></li>
-                <li><a href="/TFG-1/blog/">Blog</a></li>
-                <li><a href="/TFG-1/contacto/">Contacto</a></li>
+                <li><a href="/TFG/inicio/">Inicio</a></li>
+                <li><a href="/TFG/latara/">La Tará</a></li>
+                <li><a href="/TFG/educacion/">Educación</a></li>
+                <li><a href="/TFG/espectacuos/">Espectáculos</a></li>
+                <li><a href="/TFG/tienda/">Tienda</a></li>
+                <li><a href="/TFG/blog/">Blog</a></li>
+                <li><a href="/TFG/contacto/">Contacto</a></li>
             </ul>
         </nav>
         <button class="login" id="login-button">Acceso</button>
