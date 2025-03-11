@@ -20,13 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     if ($user) {
         $key = bin2hex(random_bytes(16));  
-        $resetLink = "https://campanias.roymo.info/resetPassword/?reset_key=" . $key;
+        $resetLink = "https://campanias.roymo.info/resetPassword/?reset_key=" . $key; //CAMBIAR RESETLINK dominio
         $hashedPassword = password_hash($key, PASSWORD_BCRYPT); 
         $sql = "INSERT INTO Password_reset (id_user, reset_key) VALUES ('" . $user['id_usuario'] . "', '$key')";
 
-        $html = file_get_contents('forgotPassword.html');
+        $html = file_get_contents('forgotPassword.html'); //Haremos un html a partir de un mjml para el envío de emails
         $html = str_replace('{{resetLink}}', $resetLink, $html);
-        $html = str_replace('{{tratamiento}}', $treatment, $html);
         $html = str_replace('{{icono}}', $icon, $html);
 
 

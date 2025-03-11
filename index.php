@@ -1,6 +1,8 @@
 <?php
-use \JWT\JWT;
-use \JWT\Key;
+require_once 'jwt/JWT.php';
+require_once 'jwt/Key.php';
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 $route = isset($_GET['route']) ? trim($_GET['route'], '/') : '';
 
@@ -211,7 +213,9 @@ if ($route === '') {
         background-color: none;
         border: none;
     }
-
+    #forgotPasswordPopup {
+        display: none;
+    }
     #login-popup {
         display: none;
         position: fixed;
@@ -285,6 +289,18 @@ if ($route === '') {
         height: 100%;
         z-index: -1;
     }
+    .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        z-index: 1000;
+        position: absolute;
+        top:50%;
+        left:50%;
+    }
 </style>
 
 <body>
@@ -308,11 +324,25 @@ if ($route === '') {
         <div class="popup-container">
             <form>
                 <img src="resources/img/logo.png" class="logo">
-                <input placeholder="Correo electrónico" id="login-email" class="input-login" type="password" required>
-                <input placeholder="Contraseña" id="login-password" class="input-login" type="email" required>
+                <input placeholder="Correo electrónico" id="login-email" name="login-email" class="input-login" type="email" required>
+                <input placeholder="Contraseña" id="login-password" name="login-password" class="input-login" type="password" required>
                 <button type="submit">Enviar</button>
                 <button type="button" id="forgotPassword">¿Has olvidado tu contraseña?</button>
                 <div id="login-message"></div>
+            </form>
+        </div>
+    </div>
+    <div id="spinner" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    <div id="forgotPasswordPopup" class="popup">
+        <div class="popup-container">
+            <form id="resetPasswordForm" action="/api/usuarios/forgotPassword/index.php" method="POST">
+                <img src="../resources/logoRommel.png" class="logo">
+                <label>Correo electrónico:</label>
+                <input name="emailReset" type="email" id="emailReset" placeholder="Introduzca su correo electrónico" required>
+                <button type="submit" id="forgotPasswordBtn">Enviar</button>
+                <div id="message"></div>
             </form>
         </div>
     </div>
@@ -355,7 +385,11 @@ if ($route === '') {
             .catch(error => console.error("Error al cargar el archivo JSON:", error));
         }
     });
-
+    const popup = document.getElementById('forgotPasswordPopup');
+      document.getElementById('forgotPasswordBtn').addEventListener("click",function () {
+        popup.style.display = 'flex';
+      });
+    
     const loginButton = document.getElementById('login-button');
     const loginPopup = document.getElementById('login-popup');
     loginButton.addEventListener("click", function () {
@@ -366,6 +400,73 @@ if ($route === '') {
             loginPopup.style.display = "none";
         }
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const loginForm = document.getElementById("login_form");
+
+    loginForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const passwd = document.getElementById("passwd").value;
+
+        if (!email || !passwd) { return;}
+
+        fetch("https://campanias.roymo.info/api/usuarios/login/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email: email, passwd: passwd })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                setTimeout(() => {
+                    console.log("Redirigiendo a /usuarios");
+                    window.location.href = "/usuarios";
+                }, 500);
+            } else {
+               console.log("Credenciales incorresctAAAS");
+            }
+        })
+        .catch(error => {
+            console.log("Error en la solicitud:", error);
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const resetPasswordForm = document.getElementById("resetPasswordForm");
+    resetPasswordForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const emailReset = document.getElementById("emailReset").value;
+        const spinner = document.getElementById("spinner");
+
+        if (!emailReset) { return;}
+
+        spinner.style.display = "block";
+
+        fetch("https://dominiooo/api/usuarios/forgotPassword/index.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ emailReset: emailReset })
+        })
+        .then(response => response.json())
+        .then(data => {
+            spinner.style.display = "none"; 
+            console.log("Enviadoooo");
+        })
+        .catch(error => {
+            spinner.style.display = "none";
+            console.log("Error al procesar la solicitud");
+        });
+    });
+});
+
 </script>
 
 <?php

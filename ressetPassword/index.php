@@ -1,5 +1,6 @@
 <?php
 //include('/var/www/vhosts/campanias.roymo.info/httpdocs/includes/mysql-connection.php');
+//Faltan estilos
 /** Accedemos con el GET a la reset key  para poder incluirla en la tabla de Password_reset y par acceder a la id del user */
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['reset_key'])) {
     $reset_key = $_GET['reset_key'];
