@@ -311,6 +311,7 @@ if ($route === '') {
                 <input placeholder="Correo electrónico" id="login-email" class="input-login" type="password" required>
                 <input placeholder="Contraseña" id="login-password" class="input-login" type="email" required>
                 <button type="submit">Enviar</button>
+                <button type="button" id="forgotPassword">¿Has olvidado tu contraseña?</button>
                 <div id="login-message"></div>
             </form>
         </div>
