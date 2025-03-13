@@ -1,2 +1,2 @@
 # TFG
-Proyecto de final de grao
+Proyecto de final de grado
