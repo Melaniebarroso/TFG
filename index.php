@@ -122,7 +122,7 @@ if ($route === '') {
         text-transform: uppercase;
         font-weight: 400;
         letter-spacing: 4px;
-        color: white;
+        color: black;
         padding: 0px;
 
     }
