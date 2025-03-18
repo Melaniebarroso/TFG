@@ -103,6 +103,7 @@ if ($route === '') {
     .dark-mode {
         --bg-color: #1a1a1a;
         --text-color: #ffffff;
+        transition: all 1s ease-out;
     }
 
     header {
@@ -122,11 +123,13 @@ if ($route === '') {
         text-transform: uppercase;
         font-weight: 400;
         letter-spacing: 4px;
-        color: black;
+        var(--text-color);
         padding: 0px;
 
     }
-
+     p {
+        color: var(--text-color);
+    }
     nav ul {
         list-style: none;
         padding: 0;
@@ -210,8 +213,10 @@ if ($route === '') {
 
     .theme-toggle {
         padding: 0;
-        background-color: none;
-        border: none;
+        background-color: transparent;
+        border: none; 
+        font-size: 24px;
+        cursor: pointer;
     }
     #forgotPasswordPopup {
         display: none;
