@@ -52,6 +52,7 @@
         padding: 15px 0;
         text-align: center;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        color: var(--text-color);
     }
 
     h1 {
@@ -62,10 +63,20 @@
         letter-spacing: 4px;
         color: white;
         padding: 0px;
-
+        transition: all 0.4s ease-in-out;
     }
-
-    nav ul {
+    p {
+        color: var(--text-color);
+        transition: all 0.4s ease-in-out;
+    }
+    #nav-list {
+        display: flex;           
+        justify-content: center;  
+        gap: 20px;    
+        padding: 0;
+        list-style: none;      
+    }
+    #nav-list ul {
         list-style: none;
         padding: 0;
         display: flex;
@@ -73,59 +84,54 @@
         gap: 20px;
     }
 
-    nav li{
+    #nav-list li{
         color: white;
         cursor: pointer;
         opacity: 0;
         transform: translateY(-20px);
         transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     }
-    nav li a {
+
+    #nav-list li a {
         text-decoration: none;
         color: white;
     }
-    nav li a:visited {
+    #nav-list li a:visited {
         text-decoration: none;
         color: white;
     }
 
-    nav li a:hover {
-        color: yellow;
+    #nav-list li a:hover {
+        color: red;
     }
 
-    nav li:nth-child(1) {
+    #nav-list li:nth-child(1) {
         transition-delay: 0.1s;
     }
 
-    nav li:nth-child(2) {
+    #nav-list li:nth-child(2) {
         transition-delay: 0.2s;
     }
 
-    nav li:nth-child(3) {
+    #nav-list li:nth-child(3) {
         transition-delay: 0.3s;
     }
 
-    nav li:nth-child(4) {
+    #nav-list li:nth-child(4) {
         transition-delay: 0.4s;
     }
 
-    nav li:nth-child(5) {
+    #nav-list li:nth-child(5) {
         transition-delay: 0.5s;
     }
 
-    nav li:nth-child(6) {
+    #nav-list li:nth-child(6) {
         transition-delay: 0.6s;
     }
 
-    nav li:nth-child(7) {
+    #nav-list li:nth-child(7) {
         transition-delay: 0.7s;
     }
-
-    .nav-list-show li {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
     .logo {
         max-width: 90px;
     }
@@ -154,7 +160,7 @@
         cursor: pointer;
         outline: none;
     }
-    .thrme.toggle:focus {
+    .theme.toggle:focus {
         outline: none;
     }
 
@@ -263,18 +269,23 @@
         </div>
     </div>
     <div id="particles-js"></div>
-</body>
-
-</html>
-<script>
+    <script>
     fetch('../particlesjs-config.json')
             .then(response => response.json())
             .then(config => {
                 particlesJS('particles-js', config);
             })
             .catch(error => console.error("Error al cargar el archivo JSON:", error));
+
     window.addEventListener("load", () => {
         document.getElementById("nav-list").classList.add("nav-list-show");
+    });
+    //Añadido manualmente este estilo en javascript ya que había confusión entre archivos.
+    window.addEventListener("load", () => {
+    document.querySelectorAll("#nav-list li").forEach(li => {
+        li.style.opacity = "1";
+        li.style.transform = "translateY(0)";
+        });
     });
 
     const toggleButton = document.getElementById("theme-toggle");
@@ -313,3 +324,6 @@
         }
     });
 </script>
+
+</body>
+</html>

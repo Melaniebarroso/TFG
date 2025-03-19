@@ -123,12 +123,13 @@ if ($route === '') {
         text-transform: uppercase;
         font-weight: 400;
         letter-spacing: 4px;
-        var(--text-color);
+        color: var(--text-color);
         padding: 0px;
-
+        transition: all 0.4s ease-in-out;
     }
      p {
         color: var(--text-color);
+        transition: all 0.4s ease-in-out;
     }
     nav ul {
         list-style: none;
@@ -155,7 +156,7 @@ if ($route === '') {
     }
 
     nav li a:hover {
-        color: yellow;
+        color: red;
     }
 
     nav li:nth-child(1) {
