@@ -234,18 +234,18 @@ if ($route === '') {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
         justify-content: center;
         align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
     }
 
     #login-popup .popup-container {
+        display: none;
         width: 100%;
         max-width: 400px;
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 999;
     }
 
     #login-popup .popup-container form {
@@ -396,21 +396,28 @@ if ($route === '') {
             .catch(error => console.error("Error al cargar el archivo JSON:", error));
         }
     });
-    const popup = document.getElementById('forgotPasswordPopup');
-      document.getElementById('forgotPasswordBtn').addEventListener("click",function () {
-        popup.style.display = 'flex';
-      });
-    
+
     const loginButton = document.getElementById('login-button');
     const loginPopup = document.getElementById('login-popup');
+
+    console.log(loginPopup.style);
     loginButton.addEventListener("click", function () {
-        loginPopup.style.display = 'block';
-    })
+        console.log("boton pulsado");
+        loginPopup.style.display = 'flex'; 
+        loginPopup.style.zIndex ="999";
+    });
+
     window.addEventListener("click", (event) => {
         if (event.target === loginPopup) {
             loginPopup.style.display = "none";
         }
     });
+
+    const popup = document.getElementById('forgotPasswordPopup');
+      document.getElementById('forgotPasswordBtn').addEventListener("click",function () {
+        popup.style.display = 'flex';
+      });
+    
 
     document.addEventListener("DOMContentLoaded", function() {
     const loginForm = document.getElementById("login_form");

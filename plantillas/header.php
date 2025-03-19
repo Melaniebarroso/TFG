@@ -171,18 +171,18 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
         justify-content: center;
         align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
     }
 
     #login-popup .popup-container {
+        display: none;
         width: 100%;
         max-width: 400px;
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 999;
     }
 
     #login-popup .popup-container form {
@@ -259,7 +259,7 @@
     <div class="login-popup" id="login-popup">
         <div class="popup-container">
             <form>
-                <img src="resources/img/logo.png" class="logo">
+                <img src="../resources/img/logo.png" class="logo">
                 <input placeholder="Correo electrónico" id="login-email" class="input-login" type="password" required>
                 <input placeholder="Contraseña" id="login-password" class="input-login" type="email" required>
                 <button type="submit">Enviar</button>
@@ -269,7 +269,9 @@
         </div>
     </div>
     <div id="particles-js"></div>
-    <script>
+</body>
+</html>
+<script>
     fetch('../particlesjs-config.json')
             .then(response => response.json())
             .then(config => {
@@ -315,15 +317,18 @@
 
     const loginButton = document.getElementById('login-button');
     const loginPopup = document.getElementById('login-popup');
+
+    console.log(loginPopup.style);
     loginButton.addEventListener("click", function () {
-        loginPopup.style.display = 'block';
-    })
+        console.log("boton pulsado");
+        loginPopup.style.display = 'flex'; 
+        loginPopup.style.zIndex ="999";
+    });
+
     window.addEventListener("click", (event) => {
         if (event.target === loginPopup) {
             loginPopup.style.display = "none";
         }
     });
-</script>
 
-</body>
-</html>
+</script>
