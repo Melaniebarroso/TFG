@@ -148,8 +148,14 @@
 
     .theme-toggle {
         padding: 0;
-        background-color: none;
-        border: none;
+        background-color: transparent;
+        border: none; 
+        font-size: 24px;
+        cursor: pointer;
+        outline: none;
+    }
+    .thrme.toggle:focus {
+        outline: none;
     }
 
     #login-popup {

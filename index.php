@@ -217,7 +217,12 @@ if ($route === '') {
         border: none; 
         font-size: 24px;
         cursor: pointer;
+        outline: none;
     }
+    .thrme.toggle:focus {
+        outline: none;
+    }
+
     #forgotPasswordPopup {
         display: none;
     }
