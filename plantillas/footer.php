@@ -36,7 +36,7 @@
     }
 
     #nav-footer li a:hover {
-        color: red;
+        color:rgb(255, 54, 54);
     }
     h4 {
         font-family: "Principal";
@@ -48,10 +48,24 @@
         padding: 0px;
         transition: all 0.4s ease-in-out;
     }
-    p {
+    footer p {
         font-family: "Principal";
         color: white;
     }
+    footer input {
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+    footer input:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        outline: none;
+    }
+
     #contact-button {
         background: none;
         border: none;

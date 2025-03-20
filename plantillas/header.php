@@ -61,7 +61,7 @@
         text-transform: uppercase;
         font-weight: 400;
         letter-spacing: 4px;
-        color: white;
+        color: var(--text-color);
         padding: 0px;
         transition: all 0.4s ease-in-out;
     }
@@ -297,7 +297,7 @@
         if (body.classList.contains("dark-mode")) {
             localStorage.setItem("theme", "dark");
             toggleButton.textContent = "☀️";
-            fetch('../particlesjs-dark-config.json')
+            fetch('particlesjs-dark-config.json')
             .then(response => response.json())
             .then(config => {
                 particlesJS('particles-js', config);
@@ -306,7 +306,7 @@
         } else {
             localStorage.setItem("theme", "light");
             toggleButton.textContent = "🌙";
-            fetch('../particlesjs-config.json')
+            fetch('particlesjs-config.json')
             .then(response => response.json())
             .then(config => {
                 particlesJS('particles-js', config);
