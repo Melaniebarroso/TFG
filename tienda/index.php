@@ -1,3 +1,6 @@
+<?php
+include("../plantillas/header.php")
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -160,3 +163,7 @@ foreach ($productos as $producto) {
 }
 
 -->
+
+<?php
+include("../plantillas/footer.php")
+?>
