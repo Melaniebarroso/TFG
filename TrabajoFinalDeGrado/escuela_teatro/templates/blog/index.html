@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<style>
+    article {
+    padding: 6rem 1.5rem;
+    max-width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .blog-box {
+    background-color: rgb(220, 231, 224);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    text-align: left;
+  }
+
+  .blog-box h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-box a {
+    color: #7e22ce;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .blog-box a:hover {
+    text-decoration: underline;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<article>
+    <h2 class="principal">Conoce nuestras últimas noticias</h2>
+    <div class="blog-box">
+      <h3>Nuevo taller de improvisación en mayo</h3>
+      <p>¡Inscripciones abiertas! Un espacio para explorar el cuerpo y la palabra en escena.</p>
+      <a href="{% url 'blog' %}">Leer más →</a>
+    </div>
+  </article>
+{% endblock %}

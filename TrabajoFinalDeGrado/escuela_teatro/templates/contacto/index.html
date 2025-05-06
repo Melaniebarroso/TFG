@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+{% block content %}
+<div id="contact">
+
+    <form id="contact_form">
+       <div>
+          <input type="text" id="nombre" name="nombre" required placeholder="Nombre del/la interesado/a">
+       </div>
+       <div>
+          <input type="email" id="email" name="email" required placeholder="Correo electrónico">
+       </div>
+       <div>
+          <textarea id="mensaje" name="mensaje" rows="4" required placeholder="¡No dudes en ponerte en contacto!"></textarea>
+       </div>
+       <div>
+          <button type="submit">Enviar</button>
+       </div>
+    </form>
+
+</div>
+{% endblock %}

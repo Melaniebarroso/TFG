@@ -1,0 +1,316 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<!-- Api para mostrar el mapa con la dirección -->
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAgJ8H6AThOR2nfw167BIDBhK66CZAiUo&libraries=places&callback=initMap" async defer></script>-->
+
+<script type="text/javascript">
+  /**window.initMap = function() {
+    var direccion = 'Santa Fe, Granada';
+  
+    console.log("Dirección concatenada:", direccion);
+
+    var geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({ 'address': direccion }, function(results, status) {
+      console.log("Resultado de la geocodificación:", results);
+      console.log("Estado de la geocodificación:", status);
+
+      if (status === 'OK') {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: results[0].geometry.location
+        });
+
+        var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+        });
+      } else {
+        console.error('No se pudo encontrar la ubicación:', status);
+        alert('No se pudo encontrar la ubicación: ' + status);
+      }
+    });
+  };**/
+</script>
+<link rel="stylesheet" href="{% static 'css/inicio.css' %}">
+<style>
+  .videoInicial {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -10;
+  }
+
+  .titulos {
+    font-family: Title;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 1rem;
+  }
+
+  .titulos h1,
+  .titulos h2 {
+    margin: 0;
+  }
+
+  .titulos h1 {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+
+  .titulos h2 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-top: 1rem;
+  }
+
+  article {
+    padding: 6rem 1.5rem;
+    max-width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .quienes-somos {
+    margin-top: 20%;
+  }
+  .bg-gray {
+    border-radius: 10px;
+  }
+  .principal {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  .secundario {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #555;
+  }
+
+  a.boton {
+    background-color: #6b21a8;
+    color: white;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+
+  a.boton:hover {
+    background-color: #581c87;
+  }
+
+  .bg-gray {
+    background-color: #f5f5f5;
+  }
+
+  .card-obra, .card-personal {
+    background-color: rgb(220, 231, 224);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    text-align: left;
+  }
+
+  .card-obra img, .card-personal img {
+    width: 100%;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-obra h3, .card-personal h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .card-obra a, .card-personal a {
+    color: #7e22ce;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+
+  .card-obra a:hover {
+    text-decoration: underline;
+  }
+
+  .grid-obras{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .grid-personal {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+  .card-personal {}
+
+  @media (max-width: 768px) {
+    .grid-obras, .grid-personal {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .blog-box {
+    background-color: rgb(220, 231, 224);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    text-align: left;
+  }
+
+  .blog-box h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-box a {
+    color: #7e22ce;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .blog-box a:hover {
+    text-decoration: underline;
+  }
+   /*Animaciones para textos*/
+   @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    .delay-1 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.3s;
+    }
+
+    .typewriter {
+      text-align: center;
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid black;
+      font-size: 2rem;
+      animation: typing 3s steps(33) forwards, blink 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 33ch;
+      }
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        border-color: transparent;
+      }
+
+      50% {
+        border-color: rgb(125, 121, 121);
+      }
+    }
+
+</style>
+{% endblock %}
+{% block content %}
+<div class="videoInicial">
+  <video autoplay muted loop playsinline style="width: 100%; height: 100vh; object-fit: cover;">
+    <source src="{% static 'images/VideoInicio.mp4' %}" type="video/mp4">
+  </video>
+</div>
+
+<article>
+  <div class="titulos">
+    <h1 class="typewriter">Donde el arte cobra vida</h1>
+    <h2>Descubre La Tará</h2>
+  </div>
+</article>
+
+<article class="quienes-somos">
+  <h2 class="principal">¿Quiénes somos?</h2>
+  <p class="secundario">
+    Somos una compañía de teatro independiente ubicada en Santa Fe, Granada. Nuestro enfoque combina expresión corporal, trabajo
+    emocional y creatividad escénica.
+  </p>
+  <div id="map" class="rounded-3 shadow-sm border" style="height: 400px; width: 100%;"></div>
+
+  <div class="grid-personal">
+    <div class="card-personal">
+      <img src="{% static 'images/contenido/fNegroChaquetaPie.jpg' %}" alt="Personal-1">
+      <h3>Cristina Graos</h3>
+      <p>Directora</p>
+    </div>
+    <div class="card-personal">
+      <img src="{% static 'images/contenido/nocheBrujas.jpg' %}" alt="Personal-2">
+      <h3>Melanie Barroso</h3>
+      <p>Técnica de sonido</p>
+    </div>
+    <div class="card-personal">
+      <img src="{% static 'images/contenido/clownFBlanco.jpg' %}" alt="Personal-3">
+      <h3>David Lopo</h3>
+      <p>Técnico de iluminación</p>
+    </div>
+  </div>
+</article>
+<article>
+  <h2 class="principal">Próximos espectáculos</h2>
+  <div class="grid-obras">
+    <div class="card-obra">
+      <img src="{% static 'images/contenido/cartelSinbuga.jpg' %}" alt="Obra 1">
+      <h3>Obra: “Sinbuga”</h3>
+      <p>Viernes 3 de Julio - 20:00hs</p>
+      <p>Belicena, Granada</p>
+    </div>
+    <div class="card-obra">
+      <img src="{% static 'images/contenido/sinAnimoDeLucro.gif' %}" alt="Obra 2">
+      <h3>Obra: “Sin ánimo de lucro”</h3>
+      <p>Sábado 7 de Junio - 19:30hs</p>
+      <p>Zagra, Granada</p>
+    </div>
+  </div>
+</article>
+
+<article>
+  <h2 class="principal">Desde nuestro blog</h2>
+  <div class="blog-box">
+    <h3>Nuevo taller de improvisación en mayo</h3>
+    <p>¡Inscripciones abiertas! Un espacio para explorar el cuerpo y la palabra en escena.</p>
+    <a href="{% url 'blog' %}">Leer más →</a>
+  </div>
+</article>
+{% endblock %}
