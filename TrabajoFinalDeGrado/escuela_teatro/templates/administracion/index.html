@@ -78,6 +78,16 @@
       <p>Total de alumnos: {{ total_alumnos }}</p>
     </div>
   </section>
+  <section>
+    <h2>Crear nuevo post del blog</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Publicar</button>
+    </form>
+  </section>
+  
+  <hr>
 </body>
 
 </html>

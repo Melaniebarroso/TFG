@@ -138,3 +138,7 @@ SESSION_COOKIE_AGE = 0
 SESSION_SAVE_EVERY_REQUEST = True 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db' 
 SESSION_COOKIE_AGE = 3600 #Máximo de duración de la sesión 1 hora
+
+# Guardado de imágenes
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

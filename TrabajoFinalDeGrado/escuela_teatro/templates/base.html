@@ -3,8 +3,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Página de base</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
@@ -13,14 +13,233 @@
         AOS.init();
     </script>
     <style>
-        footer .absoluteImg {
-            padding: 60px;
-            position: relative;
-            width: 130px;
-            bottom: 160px;
-            left: 42%;
+        body {
+            background-color: #e7ede9 !important;
+        }
+        /**
+        body {
+            background-image: url("{% static 'images/fondo.png' %}") !important;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }**/
+
+        @font-face {
+            font-family: "Principal";
+            src: url("{% static 'fonts/Nunito-VariableFont_wght.woff' %}") format('woff');
         }
 
+        @font-face {
+            font-family: 'Title';
+            src: url("{% static 'fonts/Humane-Regular.woff2' %}") format('woff2'),
+            url("{% static 'fonts/Humane-Regular.otf' %}") format('opentype');
+        }
+
+        @font-face {
+            font-family: 'Nav';
+            src: url("{% static 'fonts/UnicaOne-Regular.ttf' %}") format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Cursiva';
+            src: url("{% static 'fonts/ButterflyKids-Regular.woff' %}") format('woff');
+        }
+
+
+        :root {
+            --bg-color: #e7ede9;
+            --text-color: #000000;
+        }
+
+        body {
+            font-family: "Principal", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: transparent;
+            position: relative;
+        }
+
+        .logo {
+            max-width: 70px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            font-family: "Nav", "Principal";
+            font-size: 22px;
+            font-weight: 500;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        nav ul li a:hover {
+            color: red;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        #nav-menu {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+            #nav-menu {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                background-color: #fff;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                z-index: 1000;
+                padding: 20px 0;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            #nav-menu.show {
+                display: flex;
+            }
+
+            #nav-list {
+                flex-direction: column;
+                gap: 15px;
+                padding: 0;
+                margin: 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+
+        #login-button {
+            text-decoration: none;
+            background-color: transparent;
+            color: var(--text-color);
+            border: none;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 100px;
+        }
+
+        footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            padding: 40px 20px 20px;
+            background-color: #607ebc;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #nav-footer ul {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: center;
+            gap: 15px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-family: "Nav", "Principal";
+        }
+
+        #nav-footer ul li a {
+            font-family: "Nav", "Principal";
+            font-size: 22px;
+            font-weight: 500;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .nav-footer-section {
+            width: 100%;
+            text-align: center;
+        }
+
+        .bottom-footer {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+            gap: 30px;
+        }
+
+        .subscribe {
+            width: 65%;
+        }
+
+        .subscribe h4 {
+            font-family: "Nav", "Principal";
+            font-size: 22px;
+            text-transform: uppercase;
+        }
+
+        .subscribe form input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .contact {
+            text-align: center;
+            width: 20%;
+        }
+
+        .contact .logo {
+            max-width: 60px;
+            margin-bottom: 10px;
+        }
+
+        #contact-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        #contact-button:hover {
+            color: #4CAF50;
+        }
     </style>
     {% block head %}{% endblock %}
 </head>
@@ -28,125 +247,68 @@
 <body>
     <header>
         <img src="{% static '/images/logoAzul.png' %}" class="logo">
-        <nav>
+        <button class="hamburger" id="hamburger">☰</button>
+        <nav id="nav-menu">
             <ul id="nav-list">
-                <li><a href="{% url 'inicio' %}" style="color: var(--text-color); ">Inicio</a></li>
-                <li><a href="{% url 'laTara' %}" style="color: var(--text-color); ">La Tará</a></li>
-                <li><a href="{% url 'educacion' %}" style="color: var(--text-color); ">Educación</a></li>
-                <li><a href="{% url 'espectaculos' %}" style="color: var(--text-color); ">Espectáculos</a></li>
-                <li><a href="{% url 'tienda' %}" style="color: var(--text-color); ">Tienda</a></li>
-                <li><a href="{% url 'blog' %}" style="color: var(--text-color); ">Blog</a></li>
-                <li><a href="{% url 'contacto' %}" style="color: var(--text-color); ">Contacto</a></li>
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <li><a href="{% url 'laTara' %}">La Tará</a></li>
+                <li><a href="{% url 'educacion' %}">Educación</a></li>
+                <li><a href="{% url 'espectaculos' %}">Espectáculos</a></li>
+                <li><a href="{% url 'tienda' %}">Tienda</a></li>
+                <li><a href="{% url 'blog' %}">Blog</a></li>
+                <li><a href="{% url 'contacto' %}">Contacto</a></li>
             </ul>
         </nav>
-        <a href="{% url 'login' %}" class="login" id="login-button"><img src="{% static '/images/user.png' %}" class="acceso" width="20px"></a>
-        <button id="theme-toggle" class="theme-toggle">🌙</button>
+        <a href="{% url 'login' %}" class="login" id="login-button">
+            <img src="{% static '/images/user.png' %}" class="acceso" width="20px">
+        </a>
     </header>
+
     <main>
         {% block content %}{% endblock %}
     </main>
+
     <footer>
-        <img src="{% static '/images/elefante.png' %}" class="absoluteImg">
-        <section>
+        <section class="nav-footer-section">
             <nav id="nav-footer">
                 <ul>
-                    <li><a href="{% url 'inicio' %}" style="color: var(--text-color); ">Inicio</a></li>
-                    <li><a href="{% url 'laTara' %}" style="color: var(--text-color); ">La Tará</a></li>
-                    <li><a href="{% url 'educacion' %}" style="color: var(--text-color); ">Educación</a></li>
-                    <li><a href="{% url 'espectaculos' %}" style="color: var(--text-color); ">Espectáculos</a></li>
-                    <li><a href="{% url 'tienda' %}" style="color: var(--text-color); ">Tienda</a></li>
-                    <li><a href="{% url 'blog' %}" style="color: var(--text-color); ">Blog</a></li>
-                    <li><a href="{% url 'contacto' %}" style="color: var(--text-color); ">Contacto</a></li>
+                    <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                    <li><a href="{% url 'laTara' %}">La Tará</a></li>
+                    <li><a href="{% url 'educacion' %}">Educación</a></li>
+                    <li><a href="{% url 'espectaculos' %}">Espectáculos</a></li>
+                    <li><a href="{% url 'tienda' %}">Tienda</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                    <li><a href="{% url 'contacto' %}">Contacto</a></li>
                 </ul>
             </nav>
         </section>
-        <section>
-            <div>
-                <h4 style="color: var(--text-color); ">¡Únete a la comunidad para estar informado de nuestras novedades!
-                </h4>
+
+        <section class="bottom-footer">
+            <div class="subscribe">
+                <h4>¡Únete a la comunidad para estar informado de nuestras novedades!</h4>
                 <form>
-                    <input type="email" placeholder="Correo electrónico" required>
+                    <input type="email" placeholder="Correo electrónico" required />
                 </form>
             </div>
-        </section>
-        <section>
-            <div>
+            <div class="contact">
                 <img src="{% static '/images/logoNegro.png' %}" class="logo">
-                <p style="color: var(--text-color); ">¿Dudas?</p>
-                <button id="contact-button" href="{% url 'contacto' %}" style="color: var(--text-color); ">¡Contacta
-                    aquí!</button>
+                <p>¿Dudas?</p>
+                <a href="{% url 'contacto' %}">
+                    <button id="contact-button">¡Contacta aquí!</button>
+                </a>
             </div>
         </section>
     </footer>
+
+    <script defer src="{% static 'js/script.js' %}"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+    </script>
 </body>
 
 </html>
-<script defer src="{% static 'js/script.js' %}"></script>
-<script>
-    const toggleButton = document.getElementById("theme-toggle");
-    const body = document.body;
-    const nav = document.getElementById("nav-list");
-
-    window.addEventListener('load', () => {
-        const storedTheme = localStorage.getItem("theme");
-
-        if (!storedTheme) {
-            body.classList.remove("dark-mode");
-            body.style.backgroundColor = "#d0e0d6";
-            toggleButton.textContent = "🌙";
-        } else if (storedTheme === "dark") {
-            body.classList.add("dark-mode");
-            body.style.backgroundColor = "#232121";
-            toggleButton.textContent = "☀️";
-        } else {
-            body.classList.remove("dark-mode");
-            body.style.backgroundColor = "#d0e0d6";
-            toggleButton.textContent = "🌙";
-        }
-    });
-
-    toggleButton.addEventListener("click", () => {
-        body.classList.toggle("dark-mode");
-
-        if (body.classList.contains("dark-mode")) {
-            localStorage.setItem("theme", "dark");
-            body.style.backgroundColor = "#232121";
-            toggleButton.textContent = "☀️";
-        } else {
-            localStorage.setItem("theme", "light");
-            body.style.backgroundColor = "#d0e0d6";
-            toggleButton.textContent = "🌙";
-        }
-    })
-
-
-    document.getElementById('login-form').addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const correo = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-        const tipo = document.getElementById('tipo-usuario').value;
-        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
-        fetch('/login/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'X-CSRFToken': csrfToken
-            },
-            body: new URLSearchParams({
-                'correo': correo,
-                'password': password,
-                'tipo_usuario': tipo
-            })
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'ok') {
-                    window.location.href = data.redirect_url;
-                } else {
-                    document.getElementById('login-message').innerText = data.message;
-                }
-            });
-    });
-</script>
