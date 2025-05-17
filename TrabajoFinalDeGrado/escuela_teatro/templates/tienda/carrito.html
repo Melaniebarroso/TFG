@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <h2>Tu carrito 🛒</h2>
+  {% if productos_carrito %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio unitario</th>
+          <th>Subtotal</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in productos_carrito %}
+          <tr>
+            <td>{{ item.producto.nombre }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ item.producto.precio }} €</td>
+            <td>{{ item.subtotal }} €</td>
+            <td>
+              <a href="{% url 'eliminar_del_carrito' item.producto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="text-end"><strong>Total:</strong></td>
+          <td colspan="2"><strong>{{ total }} €</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+    <a href="{% url 'checkout' %}" class="btn btn-primary">Proceder al pago</a>
+  {% else %}
+    <p>Tu carrito está vacío.</p>
+    <a href="{% url 'tienda' %}" class="btn btn-secondary">Volver a la tienda</a>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,25 +1,80 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-  <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAgJ8H6AThOR2nfw167BIDBhK66CZAiUo&libraries=places&callback=initMap"
+  async defer></script>
+<script type="text/javascript">
+    function initMap() {
+      var direccion = 'Santa Fe, Granada';
+      var geocoder = new google.maps.Geocoder();
+
+      geocoder.geocode({ 'address': direccion }, function (results, status) {
+        if (status === 'OK') {
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: results[0].geometry.location
+          });
+
+          new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+          });
+        } else {
+          alert('No se pudo encontrar la ubicación: ' + status);
+          console.error('Error al geocodificar: ' + status);
+        }
+      });
+    }
+    window.initMap = initMap;
+  </script>
+<style>
+    .section-title {
+        margin-top: 40px;
+    }
+</style>
 {% endblock %}
 {% block content %}
-<div id="contact">
-
-    <form id="contact_form">
-       <div>
-          <input type="text" id="nombre" name="nombre" required placeholder="Nombre del/la interesado/a">
-       </div>
-       <div>
-          <input type="email" id="email" name="email" required placeholder="Correo electrónico">
-       </div>
-       <div>
-          <textarea id="mensaje" name="mensaje" rows="4" required placeholder="¡No dudes en ponerte en contacto!"></textarea>
-       </div>
-       <div>
-          <button type="submit">Enviar</button>
-       </div>
-    </form>
-
-</div>
+    <div class="container-fluid pt-5">
+        <div class="container">
+            <div class="section-title">
+                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Contáctanos</h4>
+                <h1 class="display-4">Estamos aquí para resolver todas tus dudas.</h1>
+            </div>
+            <div class="row">
+                 <div id="map" class="rounded-3 shadow-sm border col-md-6 pb-5"></div>
+                <div class="col-md-6 pb-5">
+                    <div class="contact-form">
+                        <div id="success"></div>
+                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                            <div class="control-group">
+                                <input type="text" class="form-control bg-transparent p-4" id="name" placeholder="Nombre"
+                                    required="required" data-validation-required-message="Please enter your name" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <input type="email" class="form-control bg-transparent p-4" id="email" placeholder="Apellidos"
+                                    required="required" data-validation-required-message="Please enter your email" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <input type="text" class="form-control bg-transparent p-4" id="subject" placeholder="Asunto"
+                                    required="required" data-validation-required-message="Please enter a subject" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <textarea class="form-control bg-transparent py-3 px-4" rows="5" id="message" placeholder="Mensaje"
+                                    required="required"
+                                    data-validation-required-message="¿Cualquier duda? ¡Anímate a preguntarnos!"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary font-weight-bold py-3 px-5" type="submit" id="sendMessageButton">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

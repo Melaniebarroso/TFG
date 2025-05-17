@@ -5,10 +5,10 @@
     .cursos {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 1rem; 
+        gap: 1rem;
         padding: 1rem;
-        width: 80%; 
-        margin: 0 auto; 
+        width: 80%;
+        margin: 0 auto;
         justify-items: center;
     }
 
@@ -83,52 +83,34 @@
         pointer-events: none;
     }
 
-    button {
-        cursor: pointer;
-        padding: 10px 10px;
-        border: none;
-        border-radius: 15px;
-        color: #212121;
-        background: #e8e8e8;
-        font-weight: 1000;
-        font-size: 17px;
-        position: relative;
-        z-index: 1;
-        box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
-        transition: all 250ms;
-        overflow: hidden;
-        margin-top: auto; 
-        margin-bottom: 10px;
-    }
+ .reveal-btn {
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.85rem;
+  border-radius: 1rem;
+  border: 1px solid #343a40;
+  background-color: rgb(67, 66, 66);
+  color: whitesmoke;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-    button::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 0;
-        border-radius: 15px;
-        background-color: #212121;
-        z-index: -1;
-        transition: all 250ms;
-    }
+.reveal-btn:hover {
+  background-color: whitesmoke;
+  color: gray;
+  transform: translateY(-2px);
+}
 
-    button:hover {
-        color: #e8e8e8;
-    }
-
-    button:hover::before {
-        width: 100%;
-    }
     .volver-btn {
         cursor: pointer;
         text-decoration: underline;
     }
-     @media (max-width: 768px) {
+
+    @media (max-width: 768px) {
         .cursos {
-            grid-template-columns: 1fr; 
-            width: 80%; 
+            grid-template-columns: 1fr;
+            width: 80%;
             padding: 0.5rem;
         }
     }
@@ -137,67 +119,128 @@
 {% endblock %}
 
 {% block content %}
+ <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Formación</h1>
+            <div class="d-inline-flex mb-lg-5">
+            </div>
+        </div>
+    </div>
+<div class="container-fluid pt-5">
+        <div class="container">
+            <div class="section-title">
+                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">El arte del movivimiento y sus emocionesS</h4>
+                <h1 class="display-4">APRENDE CON NOSOTROS</h1>
+            </div>
+    </div>
 <section class="cursos">
-    <div class="book">
-        <h1>Curso de inicio al mundo del clown</h1>
-        <p>
-            En este curso intensivo se trabajará la técnica básica del clown, afianzando las bases tales como
-            la ternura, la mirada, la autenticidad, la vulnerabilidad, y cómo no podía faltar... mucha risa.
-        </p>
-        <p class="volver-btn">Volver</p>
-        <div class="cover">
-            <img src="{% static 'images/educacion/cartelCursoClown.jpeg' %}" alt="Portada Clown">
-            <button class="reveal-btn">Saber más</button>
-        </div>
+  <div class="book">
+    <h2 class="mb-3">Curso de inicio al mundo del clown</h2>
+    <div class="mb-2">
+      <strong>Descripción:</strong>
+      <p>Curso intensivo donde trabajamos las bases del clown: ternura, mirada, autenticidad, vulnerabilidad y por supuesto... la risa.</p>
     </div>
-    <div class="book">
-        <h1></h1>
-        <p></p>
-        <p class="volver-btn">Volver</p>
-        <div class="cover">
-            <img src="{% static 'images/educacion/cartelCursoMimo.png' %}" alt="Portada mimo">
-            <button class="reveal-btn">Saber más</button>
-        </div>
+    <ul class="list-unstyled">
+      <li><strong>Precio:</strong> 120€</li>
+      <li><strong>Aforo:</strong> Máximo 15 personas</li>
+      <li><strong>Duración:</strong> 12 horas (repartidas en 3 días)</li>
+    </ul>
+    <p class="volver-btn">Volver</p>
+    <div class="cover">
+      <img src="{% static 'images/educacion/cartelCursoClown.jpeg' %}" alt="Portada Clown" class="img-fluid">
+            <button class="reveal-btn btn btn-outline-dark mt-2">Saber más</button>
     </div>
-    <div class="book">
-        <h1></h1>
-        <p></p>
-        <p class="volver-btn">Volver</p>
-        <div class="cover">
-            <img src="{% static 'images/educacion/cursoMáscaraNeutra.png' %}" alt="Portada máscara neutra">
-            <button class="reveal-btn">Saber más</button>
-        </div>
+  </div>
+
+  <div class="book">
+    <h2 class="mb-3">Curso de mimo escénico</h2>
+    <div class="mb-2">
+      <strong>Descripción:</strong>
+      <p>Aprende a contar historias sin palabras. Mejora tu precisión gestual, control corporal y presencia escénica.</p>
     </div>
-    <div class="book">
-        <h1>Curso de inicio al mundo del clown</h1>
-        <p>
-            En este curso intensivo se trabajará la técnica básica del clown, afianzando las bases tales como
-            la ternura, la mirada, la autenticidad, la vulnerabilidad, y cómo no podía faltar... mucha risa.
-        </p>
-        <p class="volver-btn">Volver</p>
-        <div class="cover">
-            <img src="{% static 'images/educacion/cartelTallerExpCorporal.png' %}" alt="Portada expresión corporal">
-            <button class="reveal-btn">Saber más</button>
-        </div>
+    <ul class="list-unstyled">
+      <li><strong>Precio:</strong> 100€</li>
+      <li><strong>Aforo:</strong> 12 plazas</li>
+      <li><strong>Duración:</strong> 10 horas</li>
+    </ul>
+    <p class="volver-btn">Volver</p>
+    <div class="cover">
+      <img src="{% static 'images/educacion/cartelCursoMimo.png' %}" alt="Portada mimo" class="img-fluid">
+      <button class="reveal-btn btn btn-outline-dark mt-2">Saber más</button>
     </div>
-    <div class="book">
-        <h1></h1>
-        <p></p>
-        <p class="volver-btn">Volver</p>
-        <div class="cover">
-            <img src="{% static 'images/educacion/cartelTallerClown.png' %}" alt="Portada taller clown">
-            <button class="reveal-btn">Saber más</button>
-        </div>
+  </div>
+
+  <div class="book">
+    <h2 class="mb-3">Curso de máscara neutra</h2>
+    <div class="mb-2">
+      <strong>Descripción:</strong>
+      <p>Curso enfocado en la conciencia del cuerpo y el trabajo físico desde la neutralidad de la máscara. Ideal para actores y actrices.</p>
     </div>
-    <div class="book">
-        <h1></h1>
-        <p></p>
-        <p class="volver-btn">Volver</p>
-        <div class="cover">
-            <img src="{% static 'images/educacion/tallerTeatro.png' %}" alt="Portada taller de teatro">
-            <button class="reveal-btn">Saber más</button>
-        </div>
+    <ul class="list-unstyled">
+      <li><strong>Precio:</strong> 110€</li>
+      <li><strong>Aforo:</strong> 10 personas</li>
+      <li><strong>Duración:</strong> 8 horas</li>
+    </ul>
+    <p class="volver-btn">Volver</p>
+    <div class="cover">
+      <img src="{% static 'images/educacion/cursoMáscaraNeutra.png' %}" alt="Portada máscara neutra" class="img-fluid">
+      <button class="reveal-btn btn btn-outline-dark mt-2">Saber más</button>
     </div>
+  </div>
+
+  <div class="book">
+    <h2 class="mb-3">Taller de expresión corporal</h2>
+    <div class="mb-2">
+      <strong>Descripción:</strong>
+      <p>Reconecta con tu cuerpo y libera tensiones. Aprenderás a utilizar tu cuerpo como canal de expresión escénica.</p>
+    </div>
+    <ul class="list-unstyled">
+      <li><strong>Precio:</strong> 60€</li>
+      <li><strong>Aforo:</strong> 15 participantes</li>
+      <li><strong>Duración:</strong> 4 horas</li>
+    </ul>
+    <p class="volver-btn">Volver</p>
+    <div class="cover">
+      <img src="{% static 'images/educacion/cartelTallerExpCorporal.png' %}" alt="Portada expresión corporal" class="img-fluid">
+      <button class="reveal-btn btn btn-outline-dark mt-2">Saber más</button>
+    </div>
+  </div>
+
+  <div class="book">
+    <h2 class="mb-3">Taller de clown en familia</h2>
+    <div class="mb-2">
+      <strong>Descripción:</strong>
+      <p>Un espacio donde compartir risas, juegos y escenas entre padres, madres, peques y abuelos. Diversión garantizada.</p>
+    </div>
+    <ul class="list-unstyled">
+      <li><strong>Precio:</strong> 50€ por familia</li>
+      <li><strong>Aforo:</strong> 6-8 familias</li>
+      <li><strong>Duración:</strong> 3 horas</li>
+    </ul>
+    <p class="volver-btn">Volver</p>
+    <div class="cover">
+      <img src="{% static 'images/educacion/cartelTallerClown.png' %}" alt="Portada taller clown" class="img-fluid">
+      <button class="reveal-btn btn btn-outline-dark mt-2">Saber más</button>
+    </div>
+  </div>
+
+  <div class="book">
+    <h2 class="mb-3">Taller de teatro creativo</h2>
+    <div class="mb-2">
+      <strong>Descripción:</strong>
+      <p>Invitamos a crear desde cero: personajes, situaciones y escenas. Una experiencia colectiva de creación teatral.</p>
+    </div>
+    <ul class="list-unstyled">
+      <li><strong>Precio:</strong> 90€</li>
+      <li><strong>Aforo:</strong> 15 personas</li>
+      <li><strong>Duración:</strong> 6 horas</li>
+    </ul>
+    <p class="volver-btn">Volver</p>
+    <div class="cover">
+      <img src="{% static 'images/educacion/tallerTeatro.png' %}" alt="Portada taller de teatro" class="img-fluid">
+      <button class="reveal-btn btn btn-outline-dark mt-2">Saber más</button>
+    </div>
+  </div>
 </section>
 
 <script>

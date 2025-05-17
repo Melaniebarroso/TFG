@@ -1,41 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block head %}
-<!-- Api para mostrar el mapa con la dirección -->
-<script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAgJ8H6AThOR2nfw167BIDBhK66CZAiUo&libraries=places&callback=initMap"
-  async defer></script>
-
-<script type="text/javascript">
-  window.initMap = function () {
-    var direccion = 'Santa Fe, Granada';
-
-    console.log("Dirección concatenada:", direccion);
-
-    var geocoder = new google.maps.Geocoder();
-
-    geocoder.geocode({ 'address': direccion }, function (results, status) {
-      console.log("Resultado de la geocodificación:", results);
-      console.log("Estado de la geocodificación:", status);
-
-      if (status === 'OK') {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: results[0].geometry.location
-        });
-
-        var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-        });
-      } else {
-        console.error('No se pudo encontrar la ubicación:', status);
-        alert('No se pudo encontrar la ubicación: ' + status);
-      }
-    });
-  };
-</script>
 <style>
   .videoInicial {
     position: absolute;
@@ -121,7 +86,7 @@
   }
 
   .quienes-somos {
-    margin-top: 20%;
+    margin-top: 20px;
   }
 
   .bg-gray {
@@ -222,7 +187,6 @@
   }
 
   .grid-personal {
-    margin-top: 50px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
@@ -301,108 +265,60 @@
     color: #555;
     text-align: center;
   }
-
-
-
-  /*Animaciones para textos*/
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  p {
+    font-family: "Principal";
+    font-size: 18px;
+  }
+  .newsletter-container {
+  border-radius: 10px;
+  }
+  .newsletter-image {
+    width: 75%;
+    display: block;
+    margin: 0 auto;
   }
 
-  .fade-in-up {
-    opacity: 0;
-    animation: fadeInUp 1s ease-out forwards;
-  }
 
-  .delay-1 {
-    animation-delay: 0.2s;
-  }
-
-  .delay-2 {
-    animation-delay: 0.3s;
-  }
-
-  .typewriter {
-    text-align: center;
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 2px solid black;
-    font-size: 2rem;
-    animation: typing 3s steps(18) forwards, blink 0.75s step-end infinite;
-  }
-
-  @keyframes typing {
-    from {
-      width: 0
-    }
-
-    to {
-      width: 18ch;
-    }
-  }
-
-  @keyframes blink {
-
-    0%,
-    100% {
-      border-color: transparent;
-    }
-
-    50% {
-      border-color: rgb(125, 121, 121);
-    }
-  }
 </style>
 {% endblock %}
 {% block content %}
-<div class="videoInicial">
-  <video autoplay muted loop playsinline style="width: 100%; height: 100vh; object-fit: cover;">
-    <source src="{% static 'images/VideoInicio.mp4' %}" type="video/mp4">
-  </video>
+<div class="container-fluid p-0 mb-5">
+  <div id="blog-carousel" class="carousel slide overlay-bottom" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="w-100" src="{% static 'images/contenido/clownDB3.jpg' %}" alt="Image">
+        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+          <h2 class="text-primary font-weight-medium m-0">ESCUELA DE TEATRO</h2>
+          <h1 class="display-1 text-white m-0">LA TARÁ</h1>
+          <h2 class="text-white m-0">Donde el arte cobra vida</h2>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="w-100" src="{% static 'images/contenido/clownDB4.jpg' %}" alt="Image">
+        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+          <h2 class="text-primary font-weight-medium m-0">ESCUELA DE TEATRO</h2>
+          <h1 class="display-1 text-white m-0">LA TARÁ</h1>
+          <h2 class="text-white m-0">Donde el arte cobra vida</h2>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#blog-carousel" data-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#blog-carousel" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+  </div>
 </div>
-
-<article class="header">
-  <div class="titulos">
-    <div class="header-content">
-      <h1>Escuela de Teatro en Granada</h1>
-      <h2 class="typewriter">Descubre La Tará</h2>
-      <p class="intro-text">¿Te gustaría formarte a partir de la expresión corporal y las emociones?</p>
-    </div>
-    <div class="header-bottom-right">
-      <p>¡Anímate! Quedan muy pocas plazas para los cursos de verano</p>
-    </div>
-  </div>
-
-  <div class="header-container">
-    <div>
-      <a href="{% url 'espectaculos' %}">Espectáculos en gira</a>
-    </div>
-    <div>
-      <a href="{% url 'educacion' %}">Oferta educativa</a>
-    </div>
-  </div>
-</article>
-
-
 <article class="quienes-somos">
-  <h2 class="principal">¿Quiénes somos?</h2>
+  <div class="section-title">
+    <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Quiénes somos</h4>
+  </div>
   <p class="secundario">
     Somos una compañía de teatro independiente ubicada en Santa Fe, Granada. Nuestro enfoque combina expresión corporal,
     trabajo
     emocional y creatividad escénica.
   </p>
-  <div id="map" class="rounded-3 shadow-sm border" style="height: 400px; width: 100%;"></div>
-
-
   <div class="grid-personal">
     <div class="card">
       <div class="card__inner">
@@ -412,9 +328,7 @@
         <div class="card__back">
           <p class="card__title">Cristina Graos</p>
           <p class="card__description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+            Directora de la Escuela. <br> Licenciada en Artes Escénicas con un máster en profesorado
           </p>
         </div>
       </div>
@@ -427,9 +341,7 @@
         <div class="card__back">
           <p class="card__title">Melanie Barroso</p>
           <p class="card__description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+            Técnica de sonido. <br> Mano derecha jiji
           </p>
         </div>
       </div>
@@ -442,39 +354,197 @@
         <div class="card__back">
           <p class="card__title">David Lopo</p>
           <p class="card__description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+            Técnico de iluminación.
           </p>
         </div>
       </div>
     </div>
   </div>
 </article>
-<article>
-  <h2 class="principal">Próximos espectáculos</h2>
-  <div class="grid-obras">
-    <div class="card-obra">
-      <img src="{% static 'images/contenido/cartelSinbuga.jpg' %}" alt="Obra 1">
-      <h3>Obra: “Sinbuga”</h3>
-      <p>Viernes 3 de Julio - 20:00hs</p>
-      <p>Belicena, Granada</p>
+<div class="container-fluid py-5">
+  <div class="container">
+    <div class="section-title">
+      <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">¿POR QUÉ NOSOTROS?</h4>
     </div>
-    <div class="card-obra">
-      <img src="{% static 'images/contenido/sinAnimoDeLucro.gif' %}" alt="Obra 2">
-      <h3>Obra: “Sin ánimo de lucro”</h3>
-      <p>Sábado 7 de Junio - 19:30hs</p>
-      <p>Zagra, Granada</p>
+    <div class="row">
+      <div class="col-lg-4 py-0 py-lg-5">
+        <h1 class="mb-3">Espectáculos</h1>
+        <p>Nuestra actriz principal, especializada en mimo y clown, protagoniza espectáculos visuales y emocionales
+          donde el lenguaje no es una barrera. El gesto, la mirada y el silencio cuentan historias que conectan con
+          todas las edades y culturas. Una experiencia escénica universal que emociona sin decir una palabra.</p>
+        <a href="{% url 'espectaculos' %}" class="btn btn-primary font-weight-bold py-2 px-4 mt-2">Saber más</a>
+      </div>
+      <div class="col-lg-4 py-5 py-lg-0" style="min-height: 500px;">
+        <div class="position-relative h-100">
+          <img class="position-absolute w-100 h-100" src="{% static 'images/elefante.png' %}"
+            style="object-fit: cover;">
+        </div>
+      </div>
+      <div class="col-lg-4 py-0 py-lg-5">
+        <h1 class="mb-3">Formacion</h1>
+        <p>Formamos desde la emoción y el cuerpo.
+          Ofrecemos cursos de clown, mimo, máscara neutra, teatro infantil y expresión corporal. A través del juego, el
+          cuerpo y la presencia, ayudamos a explorar la creatividad, las emociones y el arte de comunicar sin palabras.
+          Para quienes quieren descubrir o profundizar en el teatro desde un enfoque sensible, físico y liberador.</p>
+        <a href="{% url 'educacion' %}" class="btn btn-primary font-weight-bold py-2 px-4 mt-2">Saber más</a>
+      </div>
     </div>
   </div>
-</article>
+</div>
+<div class="container-fluid pt-5">
+  <div class="container">
+    <div class="section-title">
+      <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Nuestros artículos</h4>
+      <h1 class="display-4">¡Consigue el tuyo!</h1>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 mb-5">
+        <div class="row align-items-center">
+          <div class="col-sm-5">
+            <img class="img-fluid mb-3 mb-sm-0" src="img/service-1.jpg" alt="">
+          </div>
+          <div class="col-sm-7">
+            <h4><i class="fa fa-truck service-icon">12€</i>Camiseta</h4>
+            <p class="m-0">Camiseta de "La Tará" lista para tus clases</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 mb-5">
+        <div class="row align-items-center">
+          <div class="col-sm-5">
+            <img class="img-fluid mb-3 mb-sm-0" src="img/service-2.jpg" alt="">
+          </div>
+          <div class="col-sm-7">
+            <h4><i class="fa fa-coffee service-icon">9€</i>Tote Bag</h4>
+            <p class="m-0">¿Ir con estilo por la calle? Já, eso es fácil gracias a nosotros.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 mb-5">
+        <div class="row align-items-center">
+          <div class="col-sm-5">
+            <img class="img-fluid mb-3 mb-sm-0" src="img/service-3.jpg" alt="">
+          </div>
+          <div class="col-sm-7">
+            <h4><i class="fa fa-award service-icon">3€</i>Bolígrafo</h4>
+            <p class="m-0">Un detalle para cualquier amigo</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 mb-5">
+        <div class="row align-items-center">
+          <div class="col-sm-5">
+            <img class="img-fluid mb-3 mb-sm-0" src="img/service-4.jpg" alt="">
+          </div>
+          <div class="col-sm-7">
+            <h4><i class="fa fa-table service-icon">7€</i>Botella</h4>
+            <p class="m-0">Preparado para sudar en nuestras clases</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid pt-5">
+  <div class="container">
+    <div class="section-title">
+      <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Cursos y talleres</h4>
+      <h1 class="display-4">Descubre más &#9759;</h1>
+      <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;"><a href="{% url 'educacion' %}">¡Quiero apuntarme!</a></h4>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <h1 class="mb-5">Cursos</h1>
+        <div class="row align-items-center mb-5">
+          <div class="col-4 col-sm-3">
+            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{% static 'images/educacion/cursoMáscaraNeutra.png' %}" alt="">
+          </div>
+          <div class="col-8 col-sm-9">
+            <h4>Curso de máscara neutra</h4>
+            <p class="m-0">sejjsejuesje</p>
+          </div>
+        </div>
+        <div class="row align-items-center mb-5">
+          <div class="col-4 col-sm-3">
+            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{% static 'images/educacion/cartelCursoMimo.png' %}" alt="">
+          </div>
+          <div class="col-8 col-sm-9">
+            <h4>Curso de inicio al mundo del mimo</h4>
+            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <h1 class="mb-5">Talleres</h1>
+        <div class="row align-items-center mb-5">
+          <div class="col-4 col-sm-3">
+            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{% static 'images/educacion/cartelTallerClown.png' %}" alt="">
+          </div>
+          <div class="col-8 col-sm-9">
+            <h4>Taller de clown</h4>
+            <p class="m-0">sjjasjasj</p>
+          </div>
+        </div>
+        <div class="row align-items-center mb-5">
+          <div class="col-4 col-sm-3">
+            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="{% static 'images/educacion/cartelTallerExpCorporal.png' %}" alt="">
+          </div>
+          <div class="col-8 col-sm-9">
+            <h4>Taller de expresión corporal</h4>
+            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="container my-5">
+  <div class="shadow p-4 newsletter-container" style="background: transparent;">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <img src="{% static 'images/dog.png' %}" alt="Newsletter Teatro" class="img-fluid rounded newsletter-image">
+      </div>
 
-<article>
-  <h2 class="principal">Desde nuestro blog</h2>
-  <div class="blog-box">
-    <h3>Nuevo taller de improvisación en mayo</h3>
-    <p>¡Inscripciones abiertas! Un espacio para explorar el cuerpo y la palabra en escena.</p>
-    <a href="{% url 'blog' %}">Leer más →</a>
+      <div class="col-lg-6">
+        <div class="text-dark">
+          <h2 class="mb-3">Suscríbete a nuestra newsletter</h2>
+          <p class="mb-4">Y obtén un <strong>10% de descuento</strong> en productos y espectáculos.</p>
+          <form>
+            <div class="form-group">
+              <input type="email" class="form-control bg-transparent border-primary text-white p-3" placeholder="Tu correo electrónico" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block font-weight-bold py-2">Suscribirme</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-</article>
+</div>
+
+<div class="container my-5">
+  <div class="section-title text-center">
+    <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Últimas entradas</h4>
+    <h1 class="display-4">Blog</h1>
+  </div>
+
+  <div class="owl-carousel testimonial-carousel">
+    {% for post in posts %}
+    <div class="testimonial-item p-3 border rounded bg-light">
+      <div class="d-flex align-items-start">
+        {% if post.imagen %}
+        <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" class="img-thumbnail mr-3" style="width: 100px; height: auto; object-fit: cover;">
+        {% endif %}
+        <div>
+          <h5 class="mb-1">{{ post.titulo }}</h5>
+          <p class="small text-muted mb-2">Publicado</p>
+          <p class="small text-dark">{{ post.contenido|truncatewords:20 }}</p>
+          <a href="{% url 'post_detalle' post.pk %}" class="btn btn-sm btn-outline-primary mt-2">Leer más →</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>No hay publicaciones aún.</p>
+    {% endfor %}
+  </div>
+</div>
+
 {% endblock %}

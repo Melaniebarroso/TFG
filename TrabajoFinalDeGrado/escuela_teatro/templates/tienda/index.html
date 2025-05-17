@@ -1,151 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Teatral</title>
-    <style>
-        .filtros {
-            text-align: center;
-            padding: 15px 0;
-        }
-
-        .filtros a {
-            color: white;
-            text-decoration: none;
-            padding: 15px 30px;
-            display: inline-block;
-            font-size: 1.1em;
-        }
-
-        .filtros a:hover {
-            background-color: #1abc9c;
-        }
-
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-            margin-top: 30px;
-            padding: 0 15px;
-        }
-
-        .product {
-            background-color: white;
-            width: 250px;
-            margin: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .product:hover {
-            transform: translateY(-10px);
-        }
-
-        .product img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-
-        .product-info {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .product h3 {
-            font-size: 1.5em;
-            margin: 10px 0;
-            color: #2c3e50;
-        }
-
-        .product p {
-            font-size: 1em;
-            color: #7f8c8d;
-            margin: 10px 0;
-        }
-
-        .product .price {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #e74c3c;
-        }
-
-        .product button {
-            background-color: #3498db;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-            transition: background-color 0.3s;
-        }
-
-        .product button:hover {
-            background-color: #2980b9;
-        }
-
-
-        @media (max-width: 768px) {
-            .product-container {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
-</head>
-<body>
-<nav class="filtros">
-    <a href="#inicio">Inicio</a>
-    <a href="#productos">Productos</a>
-    <a href="#carrito">Carrito</a>
-    <a href="#contacto">Contacto</a>
-</nav>
-
-<div class="product-container" id="productos">
-    <div class="product">
-        <img src="https://via.placeholder.com/250x200" alt="Entrada de teatro">
-        <div class="product-info">
-            <h3>Entrada para Obra</h3>
-            <p>Disfruta de una experiencia única de teatro.</p>
-            <p class="price">€20</p>
-            <button>Agregar al Carrito</button>
-        </div>
-    </div>
-
-    <div class="product">
-        <img src="https://via.placeholder.com/250x200" alt="Libro teatral">
-        <div class="product-info">
-            <h3>Libro Teatral</h3>
-            <p>Sumérgete en los secretos de la dramaturgia.</p>
-            <p class="price">€15</p>
-            <button>Agregar al Carrito</button>
-        </div>
-    </div>
-
-    <div class="product">
-        <img src="https://via.placeholder.com/250x200" alt="Disfraz teatral">
-        <div class="product-info">
-            <h3>Disfraz de Actor</h3>
-            <p>El mejor disfraz para tu próxima actuación.</p>
-            <p class="price">€35</p>
-            <button>Agregar al Carrito</button>
-        </div>
+<div class="container py-5">
+    <h1 class="mb-4 text-center">Tienda 🎭</h1>
+    <div class="row">
+        {% for producto in productos %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    {% if producto.imagenes.first %}
+                        <img src="{{ producto.imagenes.first.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+                    {% else %}
+                        <img src="{% static 'images/child.png' %}" class="card-img-top" alt="Sin imagen">
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        <p class="card-text">{{ producto.descripcion|truncatewords:20 }}</p>
+                        <p class="fw-bold text-primary">{{ producto.precio }} €</p>
+                        <a href="{% url 'agregar_al_carrito' producto.id %}" class="btn btn-sm btn-outline-dark rounded-pill mt-auto">Añadir al carrito 🛒</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 </div>
-
-
-</body>
-</html>
-
-
 {% endblock %}

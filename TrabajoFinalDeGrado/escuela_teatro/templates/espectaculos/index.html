@@ -2,63 +2,149 @@
 {% load static %}
 {% block head %}
 <style>
-    article {
-      padding: 6rem 1.5rem;
-      max-width: 80%;
-      margin: 0 auto;
-      text-align: center;
-    }
-  
-    .card-obra {
-      background-color: rgb(220, 231, 224);
-      max-height: 80%;
-      padding: 1.5rem;
-      border-radius: 1rem;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-      text-align: left;
-    }
-  
-    .card-obra img{
-      width: 100%;
-      max-height: 100%;
-      border-radius: 0.5rem;
-      margin-bottom: 1rem;
-    }
-  
-    .card-obra h3 {
-      font-size: 1.25rem;
-      font-weight: 600;
-    }
-  
-    .card-obra a {
-      color: #7e22ce;
-      font-weight: 500;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 0.5rem;
-    }
-  
-    .card-obra a:hover {
-      text-decoration: underline;
-    }
-  
-    .grid-obras{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
+  /* Estilo de pestañas */
+  .nav-tabs {
+    justify-content: center;
+    border-bottom: none;
+  }
 
-  </style>
-  {% endblock %}
-  {% block content %}
-  <article>
-    <div class="grid-obras">
-      <div class="card-obra">
-        <img src="{% static 'images/contenido/cartelSinbuga.jpg' %}" alt="Obra 1">
+  .nav-tabs .nav-link {
+    border: none;
+    border-radius: 2rem;
+    background-color: #e9ecef;
+    margin: 0 0.5rem;
+    color: #343a40;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .nav-tabs .nav-link.active {
+    background-color: #343a40;
+    color: white;
+  }
+
+  .tab-content {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    margin-top: 1rem;
+  }
+  .galeria-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10%;
+  }
+
+  .card-simple {
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .card-simple img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-simple h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+</style>
+
+{% endblock %}
+{% block content %}
+<div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+  <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+    <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Espectáculos</h1>
+    <div class="d-inline-flex mb-lg-5">
+      <p class="m-0 text-white"><a class="text-white" href="">Obras de teatro</a></p>
+      <p class="m-0 text-white px-2">/</p>
+      <p class="m-0 text-white">Cuentacuentos</p>
+      <p class="m-0 text-white px-2">/</p>
+      <p class="m-0 text-white">Animaciones</p>
+      <p class="m-0 text-white px-2">/</p>
+      <p class="m-0 text-white">Talleres de manualidades</p>
+    </div>
+  </div>
+</div>
+<div class="container-fluid py-5">
+  <div class="container">
+    <div class="section-title">
+      <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Y vosotros...</h4>
+      <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">¿A qué os dedicáis?</h4>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 py-0 py-lg-5">
+        <h1 class="mb-3">De dónde venimos</h1>
+        <p class="mb-3">Nuestra historia nace del gesto, del silencio y del juego. La directora de nuestra escuela se formó en la ESAD de Cáceres y completó su formación con un Máster en Profesorado, lo que la convierte en una profesional con la mirada puesta tanto en el arte como en la pedagogía. Especializada en mimo y clown, su trabajo conecta con la raíz más pura de la expresión: el cuerpo como vehículo de emoción, y la risa como lenguaje universal.
+Desde ahí, y junto a un equipo comprometido y creativo, nace esta propuesta: espectáculos accesibles, visuales, sin palabras, donde lo importante no se dice… se siente.</p>
       </div>
-      <div class="card-obra">
-        <img src="{% static 'images/contenido/sinAnimoDeLucro.gif' %}" alt="Obra 2">
+      <div class="col-lg-4 py-5 py-lg-0" style="min-height: 500px;">
+        <div class="position-relative h-100">
+          <img class="position-absolute w-100 h-100" src="{% static 'images/teathre.png' %}"
+            style="object-fit: contain;">
+        </div>
+      </div>
+      <div class="col-lg-4 py-0 py-lg-5">
+        <h1 class="mb-3">Nuestro objetivo</h1>
+        <p>Queremos acercar el teatro gestual y la imaginación a todos los públicos, sin barreras idiomáticas ni edades. A través del clown, el mimo y la expresión corporal, nuestros espectáculos transmiten emociones que cualquier persona puede comprender.
+Además, complementamos nuestra oferta con cuentacuentos mágicos, animaciones divertidas y talleres creativos —de reciclaje, instrumentos musicales, y más— que fomentan la participación, la expresión y el juego.
+Nuestro objetivo es claro: emocionar, educar y transformar desde el arte más esencial. Porque en un mundo que corre, nosotros apostamos por parar... y sentir.</p>
       </div>
     </div>
-  </article>
-  {% endblock %}
+  </div>
+</div>
+<ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="obras-tab" data-bs-toggle="tab" data-bs-target="#obras" type="button" role="tab">Obras</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="animaciones-tab" data-bs-toggle="tab" data-bs-target="#animaciones" type="button" role="tab">Animaciones</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="cuentacuentos-tab" data-bs-toggle="tab" data-bs-target="#cuentacuentos" type="button" role="tab">Cuentacuentos</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="talleres-tab" data-bs-toggle="tab" data-bs-target="#talleres" type="button" role="tab">Talleres</button>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="obras" role="tabpanel" aria-labelledby="obras-tab">
+    <div class="galeria-cards">
+      <div class="card-simple">
+      <img src="{% static 'images/contenido/cartelSinbuga.jpg' %}" alt="Sinbuga" class="img-fluid rounded mb-2">
+      <h5>Sinbuga</h5>
+    </div>
+    <div class="card-simple">
+      <img src="{% static 'images/contenido/sinAnimoDeLucro.gif' %}" alt="Sin ánimo de lucro" class="img-fluid rounded mb-2">
+      <h5>Sin ánimo de lucro</h5>
+    </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="animaciones" role="tabpanel" aria-labelledby="animaciones-tab">
+    <div class="galeria-cards">
+      Animaciones
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="cuentacuentos" role="tabpanel" aria-labelledby="cuentacuentos-tab">
+    <div class="galeria-cards">
+      Cuentacuentos
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="talleres" role="tabpanel" aria-labelledby="talleres-tab">
+    <div class="galeria-cards">
+      Talleres
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- Para las pestañas de boopstrap -->
+{% endblock %}

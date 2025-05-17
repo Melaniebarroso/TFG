@@ -1,8 +1,16 @@
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+from .models import BlogPost
+from django.shortcuts import redirect, render
+from .models import Administrador, Alumno
+from django.urls import reverse
+from .forms import BlogPostForm
+from .models import Producto
 
 
 def inicio(request):
-    return render(request, 'inicio/index.html')
+    posts = BlogPost.objects.order_by('-fecha_creacion')[:5] 
+    return render(request, 'inicio/index.html', {'posts': posts})
 
 def laTara(request):
     return render(request, 'laTara/index.html')
@@ -12,8 +20,6 @@ from .models import BlogPost
 def blog(request):
     posts = BlogPost.objects.order_by('-fecha_creacion')
     return render(request, 'blog/index.html', {'posts': posts})
-from django.shortcuts import get_object_or_404
-from .models import BlogPost
 
 def post_detalle(request, pk):
     post = get_object_or_404(BlogPost, pk=pk)
@@ -29,13 +35,95 @@ def espectaculos(request):
     return render(request, 'espectaculos/index.html')
 
 def tienda(request):
-    return render(request, 'tienda/index.html')
+    productos = Producto.objects.all()
+    return render(request, 'tienda/index.html', {'productos': productos})
 
-from django.shortcuts import redirect, render
-from .models import Administrador, Alumno
-from django.urls import reverse
+def agregar_al_carrito(request, producto_id):
+    carrito = request.session.get('carrito', {})
+    carrito[str(producto_id)] = carrito.get(str(producto_id), 0) + 1
+    request.session['carrito'] = carrito
+    return redirect('tienda')
 
-from django.urls import reverse
+
+def ver_carrito(request):
+    carrito = request.session.get('carrito', {})
+    productos = []
+    total = 0
+
+    for producto_id, cantidad in carrito.items():
+        producto = Producto.objects.get(id=producto_id)
+        subtotal = producto.precio * cantidad
+        total += subtotal
+        productos.append({
+            'producto': producto,
+            'cantidad': cantidad,
+            'subtotal': subtotal
+        })
+
+    context = {
+        'productos_carrito': productos,
+        'total': total
+    }
+    return render(request, 'tienda/carrito.html', context)
+
+def eliminar_del_carrito(request, producto_id):
+    carrito = request.session.get('carrito', {})
+    producto_id_str = str(producto_id)
+    if producto_id_str in carrito:
+        del carrito[producto_id_str]
+        request.session['carrito'] = carrito
+    return redirect('ver_carrito')
+
+from django.utils import timezone
+from .forms import PedidoForm
+from .models import Pedido, DetallePedido, Producto
+from django.contrib import messages
+
+def checkout(request):
+    carrito = request.session.get('carrito', {})
+    if not carrito:
+        messages.warning(request, "Tu carrito está vacío.")
+        return redirect('tienda')
+
+    if request.method == 'POST':
+        form = PedidoForm(request.POST)
+        if form.is_valid():
+            pedido = Pedido.objects.create(
+                nombre_cliente=form.cleaned_data['nombre_cliente'],
+                email_cliente=form.cleaned_data['email_cliente'],
+                direccion_envio=form.cleaned_data['direccion_envio'],
+                fecha=timezone.now(),
+                estado='Pendiente'
+            )
+            for producto_id, cantidad in carrito.items():
+                producto = Producto.objects.get(id=producto_id)
+                DetallePedido.objects.create(
+                    pedido=pedido,
+                    producto=producto,
+                    cantidad=cantidad,
+                    precio_unitario=producto.precio
+                )
+            request.session['carrito'] = {}
+            messages.success(request, "Pedido realizado con éxito. ¡Gracias por tu compra!")
+            return redirect('tienda')
+    else:
+        form = PedidoForm()
+
+    return render(request, 'tienda/checkout.html', {'form': form})
+
+# Esto será solo para el admin
+def lista_pedidos(request):
+    pedidos = Pedido.objects.all().order_by('-fecha')
+    return render(request, 'tienda/pedidos.html', {'pedidos': pedidos})
+from django.shortcuts import get_object_or_404
+
+def detalle_pedido(request, pedido_id):
+    pedido = get_object_or_404(Pedido, id=pedido_id)
+    detalles = pedido.detallepedido_set.all() 
+    return render(request, 'tienda/detalle_pedido.html', {'pedido': pedido, 'detalles': detalles})
+
+
+
 
 def login_view(request):
     if request.method == "POST":
@@ -61,13 +149,6 @@ def login_view(request):
         return render(request, 'login/index.html', {'error': 'Correo o contraseña incorrectos'})
 
     return render(request, 'login/index.html')
-
-
-from django.shortcuts import render, redirect
-from .models import Administrador, Alumno
-from django.shortcuts import render, redirect
-from .models import Administrador, Alumno, BlogPost
-from .forms import BlogPostForm
 
 def admin_dashboard(request, id):
     try:

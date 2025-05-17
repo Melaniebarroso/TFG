@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load multiplicar %}
+{% block content %}
+<div class="container py-5">
+  <h2>Detalle Pedido #{{ pedido.id }}</h2>
+  <p><strong>Cliente:</strong> {{ pedido.nombre_cliente }}</p>
+  <p><strong>Email:</strong> {{ pedido.email_cliente }}</p>
+  <p><strong>Dirección:</strong> {{ pedido.direccion_envio }}</p>
+  <p><strong>Fecha:</strong> {{ pedido.fecha|date:"d/m/Y H:i" }}</p>
+  <p><strong>Estado:</strong> {{ pedido.estado }}</p>
+
+  <h4>Productos</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio unitario</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for detalle in detalles %}
+      <tr>
+        <td>{{ detalle.producto.nombre }}</td>
+        <td>{{ detalle.cantidad }}</td>
+        <td>{{ detalle.precio_unitario }} €</td>
+        <td>{{ detalle.cantidad|multiply:detalle.precio_unitario }} €</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="{% url 'lista_pedidos' %}" class="btn btn-secondary">Volver a pedidos</a>
+</div>
+{% endblock %}

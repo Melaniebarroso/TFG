@@ -3,312 +3,142 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Página de base</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
+    <meta charset="utf-8">
+    <title>Escuela de teatro La Tará</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="img/favicon.ico" rel="icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <style>
-        body {
-            background-color: #e7ede9 !important;
-        }
-        /**
-        body {
-            background-image: url("{% static 'images/fondo.png' %}") !important;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
-        }**/
-
         @font-face {
-            font-family: "Principal";
-            src: url("{% static 'fonts/Nunito-VariableFont_wght.woff' %}") format('woff');
-        }
-
-        @font-face {
-            font-family: 'Title';
-            src: url("{% static 'fonts/Humane-Regular.woff2' %}") format('woff2'),
-            url("{% static 'fonts/Humane-Regular.otf' %}") format('opentype');
-        }
-
-        @font-face {
-            font-family: 'Nav';
+            font-family: 'Titulos';
             src: url("{% static 'fonts/UnicaOne-Regular.ttf' %}") format('truetype');
         }
 
         @font-face {
-            font-family: 'Cursiva';
-            src: url("{% static 'fonts/ButterflyKids-Regular.woff' %}") format('woff');
+            font-family: 'Principal';
+            src: url("{% static 'fonts/Nunito-VariableFont_wght.woff' %}") format('woff');
         }
 
-
-        :root {
-            --bg-color: #e7ede9;
-            --text-color: #000000;
+        .navbar-nav .nav-link {
+            font-family: 'Titulos', sans-serif;
+            font-size: 19px;
+            color: #000 !important;
         }
 
-        body {
-            font-family: "Principal", sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
+        .navbar-nav .nav-link:hover {
+            color: rgb(19, 19, 19) !important;
         }
 
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            background-color: transparent;
-            position: relative;
-        }
+        .carrito-fijo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 24px;
+  padding: 12px 16px;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        .logo {
-            max-width: 70px;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li a {
-            font-family: "Nav", "Principal";
-            font-size: 22px;
-            font-weight: 500;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: var(--text-color);
-        }
-
-        nav ul li a:hover {
-            color: red;
-        }
-
-        .hamburger {
-            display: none;
-            font-size: 30px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--text-color);
-        }
-
-        #nav-menu {
-            display: flex;
-        }
-
-        @media (max-width: 768px) {
-            #nav-menu {
-                display: none;
-                flex-direction: column;
-                align-items: center;
-                background-color: #fff;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                z-index: 1000;
-                padding: 20px 0;
-                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            }
-
-            #nav-menu.show {
-                display: flex;
-            }
-
-            #nav-list {
-                flex-direction: column;
-                gap: 15px;
-                padding: 0;
-                margin: 0;
-            }
-
-            .hamburger {
-                display: block;
-            }
-        }
-
-        #login-button {
-            text-decoration: none;
-            background-color: transparent;
-            color: var(--text-color);
-            border: none;
-            padding: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 100px;
-        }
-
-        footer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-            padding: 40px 20px 20px;
-            background-color: #607ebc;
-            color: #fff;
-            position: relative;
-            overflow: hidden;
-        }
-
-        #nav-footer ul {
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            justify-content: center;
-            gap: 15px;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-family: "Nav", "Principal";
-        }
-
-        #nav-footer ul li a {
-            font-family: "Nav", "Principal";
-            font-size: 22px;
-            font-weight: 500;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: var(--text-color);
-        }
-
-        .nav-footer-section {
-            width: 100%;
-            text-align: center;
-        }
-
-        .bottom-footer {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: flex-start;
-            justify-content: center;
-            width: 100%;
-            gap: 30px;
-        }
-
-        .subscribe {
-            width: 65%;
-        }
-
-        .subscribe h4 {
-            font-family: "Nav", "Principal";
-            font-size: 22px;
-            text-transform: uppercase;
-        }
-
-        .subscribe form input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 4px;
-            border: none;
-        }
-
-        .contact {
-            text-align: center;
-            width: 20%;
-        }
-
-        .contact .logo {
-            max-width: 60px;
-            margin-bottom: 10px;
-        }
-
-        #contact-button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        #contact-button:hover {
-            color: #4CAF50;
-        }
+.carrito-fijo:hover {
+  background-color: #388e3c;
+}
     </style>
-    {% block head %}{% endblock %}
+    {% block head %}
+    {% endblock %}
 </head>
 
 <body>
-    <header>
-        <img src="{% static '/images/logoAzul.png' %}" class="logo">
-        <button class="hamburger" id="hamburger">☰</button>
-        <nav id="nav-menu">
-            <ul id="nav-list">
-                <li><a href="{% url 'inicio' %}">Inicio</a></li>
-                <li><a href="{% url 'laTara' %}">La Tará</a></li>
-                <li><a href="{% url 'educacion' %}">Educación</a></li>
-                <li><a href="{% url 'espectaculos' %}">Espectáculos</a></li>
-                <li><a href="{% url 'tienda' %}">Tienda</a></li>
-                <li><a href="{% url 'blog' %}">Blog</a></li>
-                <li><a href="{% url 'contacto' %}">Contacto</a></li>
-            </ul>
+    <div class="container-fluid p-0 nav-bar">
+        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+            <a href="index.html" class="navbar-brand px-lg-4 m-0">
+                <img src="{% static 'images/logoNegro.png' %}" width="70px" alt="Logo">
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto p-4">
+                    <a href="{% url 'inicio' %}" class="nav-item nav-link active">Inicio</a>
+                    <a href="{% url 'educacion' %}" class="nav-item nav-link">Formación</a>
+                    <a href="{% url 'espectaculos' %}" class="nav-item nav-link">Espectáculos</a>
+                    <a href="{% url 'tienda' %}" class="nav-item nav-link">Tienda</a>
+                    <a href="{% url 'blog' %}" class="nav-item nav-link">Blog</a>
+                    <a href="{% url 'contacto' %}" class="nav-item nav-link">Contacto</a>
+                    <a href="{% url 'login' %}" class="login" id="login-button">
+                        <img src="{% static '/images/user.png' %}" class="acceso" width="20px">
+                    </a>
+                </div>
         </nav>
-        <a href="{% url 'login' %}" class="login" id="login-button">
-            <img src="{% static '/images/user.png' %}" class="acceso" width="20px">
-        </a>
-    </header>
-
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-
-    <footer>
-        <section class="nav-footer-section">
-            <nav id="nav-footer">
-                <ul>
-                    <li><a href="{% url 'inicio' %}">Inicio</a></li>
-                    <li><a href="{% url 'laTara' %}">La Tará</a></li>
-                    <li><a href="{% url 'educacion' %}">Educación</a></li>
-                    <li><a href="{% url 'espectaculos' %}">Espectáculos</a></li>
-                    <li><a href="{% url 'tienda' %}">Tienda</a></li>
-                    <li><a href="{% url 'blog' %}">Blog</a></li>
-                    <li><a href="{% url 'contacto' %}">Contacto</a></li>
-                </ul>
-            </nav>
-        </section>
-
-        <section class="bottom-footer">
-            <div class="subscribe">
-                <h4>¡Únete a la comunidad para estar informado de nuestras novedades!</h4>
-                <form>
-                    <input type="email" placeholder="Correo electrónico" required />
-                </form>
+    </div>
+    {% block content %}
+    {% endblock %}
+    <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
+        <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Aquí poner mapa de dirección
+                </h4>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>Santa Fe</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>6276117217</p>
+                <p class="m-0"><i class="fa fa-envelope mr-2"></i>lataraclown@gmail.com</p>
             </div>
-            <div class="contact">
-                <img src="{% static '/images/logoNegro.png' %}" class="logo">
-                <p>¿Dudas?</p>
-                <a href="{% url 'contacto' %}">
-                    <button id="contact-button">¡Contacta aquí!</button>
-                </a>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <div class="d-flex justify-content-start">
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i
+                            class="fab fa-twitter"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i
+                            class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
+                </div>
             </div>
-        </section>
-    </footer>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Newsletter</h4>
+                <p>¡Suscríbete para estar al tanto de nuestros descuentos y novedades!</p>
+                <div class="w-100">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-light" style="padding: 25px;"
+                            placeholder="Correo electrónico">
+                        <div class="input-group-append">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5"
+            style="border-color: rgba(256, 256, 256, .1) !important;">
+            <p class="mb-2 text-white">Copyright &copy;. Todos los
+                derechos reservados.</a></p>
+            <p class="m-0 text-white">Diseñado por <a class="font-weight-bold">Melanie
+                    Barroso</a></p>
+        </div>
+    </div>
+    <a href="{% url 'ver_carrito' %}" class="carrito-fijo" title="Ver carrito">
+  🛒
+</a>
 
-    <script defer src="{% static 'js/script.js' %}"></script>
-    <script>
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('nav-menu');
-
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('show');
-        });
-    </script>
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

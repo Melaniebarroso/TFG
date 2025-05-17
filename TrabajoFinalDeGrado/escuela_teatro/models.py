@@ -77,7 +77,8 @@ class ImagenProducto(models.Model):
     producto = models.ForeignKey(Producto, related_name='imagenes', on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to='productos_imagenes/')
     descripcion = models.CharField(max_length=255, blank=True)
-
+    class Meta:
+        db_table = 'imagen_producto'
     def __str__(self):
         return f"Imagen de {self.producto.nombre}"
 
