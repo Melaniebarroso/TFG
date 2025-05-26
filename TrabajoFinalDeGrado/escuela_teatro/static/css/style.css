@@ -9536,7 +9536,9 @@ h1,h2,h3,h4,h5 {
   color: #fff;
 }
 .page-header {
-    background: url("../images/publico.png");
-    background-size: cover;
-    background-position: center;
+    background: url("../images/publico.png") no-repeat center center;
+    background-size: cover; 
+    height: 100vh;
+    background-attachment: scroll;
+    background-position: top center;
 }

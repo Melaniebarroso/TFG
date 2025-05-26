@@ -1,4 +1,17 @@
-<h2>Perfil del alumno</h2>
-<p>Nombre: {{ alumno.nombre }}</p>
-<p>Correo: {{ alumno.correo }}</p>
-<p>Teléfono: {{ alumno.telefono }}</p>
+<h1 class="text-2xl font-bold mb-4">Bienvenido, {{ alumno.nombre }}</h1>
+
+<h2 class="text-xl font-semibold mt-8 mb-2">Tus cursos inscritos</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  {% for inscripcion in inscripciones %}
+    <div class="bg-white shadow p-4 rounded-xl">
+      <h3 class="text-lg font-bold">{{ inscripcion.curso.nombre }}</h3>
+      <p class="text-sm text-gray-600">{{ inscripcion.curso.descripcion }}</p>
+      <p class="text-sm mt-2"><strong>Inicio:</strong> {{ inscripcion.curso.fecha_inicio }}</p>
+      <p class="text-sm"><strong>Fin:</strong> {{ inscripcion.curso.fecha_fin }}</p>
+      <p class="text-sm"><strong>Estado inscripción:</strong> {{ inscripcion.estado }}</p>
+    </div>
+  {% empty %}
+    <p class="text-gray-500">No estás inscrito en ningún curso.</p>
+  {% endfor %}
+</div>

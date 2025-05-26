@@ -119,129 +119,48 @@
 {% endblock %}
 
 {% block content %}
- <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
-        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
-            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Formación</h1>
-            <div class="d-inline-flex mb-lg-5">
-            </div>
+<div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+  <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+    <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Formación</h1>
+    <div class="d-inline-flex mb-lg-5">
+      <p class="m-0 text-white"><a class="text-white" href="">Cuesos y talleres</a></p>
+    </div>
+  </div>
+</div>
+<div class="container-fluid pt-5">
+    <div class="container">
+        <div class="section-title">
+            <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">El arte del movimiento y sus emociones</h4>
+            <h1 class="display-4">APRENDE CON NOSOTROS</h1>
         </div>
     </div>
-<div class="container-fluid pt-5">
-        <div class="container">
-            <div class="section-title">
-                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">El arte del movivimiento y sus emocionesS</h4>
-                <h1 class="display-4">APRENDE CON NOSOTROS</h1>
+
+    <section class="cursos">
+        {% for curso in cursos %}
+        <div class="book">
+            <h2 class="mb-3">{{ curso.nombre }}</h2>
+            <div class="mb-2">
+                <strong>Descripción:</strong>
+                <p>{{ curso.descripcion }}</p>
             </div>
-    </div>
-<section class="cursos">
-  <div class="book">
-    <h2 class="mb-3">Curso de inicio al mundo del clown</h2>
-    <div class="mb-2">
-      <strong>Descripción:</strong>
-      <p>Curso intensivo donde trabajamos las bases del clown: ternura, mirada, autenticidad, vulnerabilidad y por supuesto... la risa.</p>
-    </div>
-    <ul class="list-unstyled">
-      <li><strong>Precio:</strong> 120€</li>
-      <li><strong>Aforo:</strong> Máximo 15 personas</li>
-      <li><strong>Duración:</strong> 12 horas (repartidas en 3 días)</li>
-    </ul>
-    <p class="volver-btn">Volver</p>
-    <div class="cover">
-      <img src="{% static 'images/educacion/cartelCursoClown.jpeg' %}" alt="Portada Clown" class="img-fluid">
-            <button class="reveal-btn btn btn-outline-dark mt-2">Saber más</button>
-    </div>
-  </div>
-
-  <div class="book">
-    <h2 class="mb-3">Curso de mimo escénico</h2>
-    <div class="mb-2">
-      <strong>Descripción:</strong>
-      <p>Aprende a contar historias sin palabras. Mejora tu precisión gestual, control corporal y presencia escénica.</p>
-    </div>
-    <ul class="list-unstyled">
-      <li><strong>Precio:</strong> 100€</li>
-      <li><strong>Aforo:</strong> 12 plazas</li>
-      <li><strong>Duración:</strong> 10 horas</li>
-    </ul>
-    <p class="volver-btn">Volver</p>
-    <div class="cover">
-      <img src="{% static 'images/educacion/cartelCursoMimo.png' %}" alt="Portada mimo" class="img-fluid">
-      <button class="reveal-btn btn btn-outline-dark mt-2">Saber más</button>
-    </div>
-  </div>
-
-  <div class="book">
-    <h2 class="mb-3">Curso de máscara neutra</h2>
-    <div class="mb-2">
-      <strong>Descripción:</strong>
-      <p>Curso enfocado en la conciencia del cuerpo y el trabajo físico desde la neutralidad de la máscara. Ideal para actores y actrices.</p>
-    </div>
-    <ul class="list-unstyled">
-      <li><strong>Precio:</strong> 110€</li>
-      <li><strong>Aforo:</strong> 10 personas</li>
-      <li><strong>Duración:</strong> 8 horas</li>
-    </ul>
-    <p class="volver-btn">Volver</p>
-    <div class="cover">
-      <img src="{% static 'images/educacion/cursoMáscaraNeutra.png' %}" alt="Portada máscara neutra" class="img-fluid">
-      <button class="reveal-btn btn btn-outline-dark mt-2">Saber más</button>
-    </div>
-  </div>
-
-  <div class="book">
-    <h2 class="mb-3">Taller de expresión corporal</h2>
-    <div class="mb-2">
-      <strong>Descripción:</strong>
-      <p>Reconecta con tu cuerpo y libera tensiones. Aprenderás a utilizar tu cuerpo como canal de expresión escénica.</p>
-    </div>
-    <ul class="list-unstyled">
-      <li><strong>Precio:</strong> 60€</li>
-      <li><strong>Aforo:</strong> 15 participantes</li>
-      <li><strong>Duración:</strong> 4 horas</li>
-    </ul>
-    <p class="volver-btn">Volver</p>
-    <div class="cover">
-      <img src="{% static 'images/educacion/cartelTallerExpCorporal.png' %}" alt="Portada expresión corporal" class="img-fluid">
-      <button class="reveal-btn btn btn-outline-dark mt-2">Saber más</button>
-    </div>
-  </div>
-
-  <div class="book">
-    <h2 class="mb-3">Taller de clown en familia</h2>
-    <div class="mb-2">
-      <strong>Descripción:</strong>
-      <p>Un espacio donde compartir risas, juegos y escenas entre padres, madres, peques y abuelos. Diversión garantizada.</p>
-    </div>
-    <ul class="list-unstyled">
-      <li><strong>Precio:</strong> 50€ por familia</li>
-      <li><strong>Aforo:</strong> 6-8 familias</li>
-      <li><strong>Duración:</strong> 3 horas</li>
-    </ul>
-    <p class="volver-btn">Volver</p>
-    <div class="cover">
-      <img src="{% static 'images/educacion/cartelTallerClown.png' %}" alt="Portada taller clown" class="img-fluid">
-      <button class="reveal-btn btn btn-outline-dark mt-2">Saber más</button>
-    </div>
-  </div>
-
-  <div class="book">
-    <h2 class="mb-3">Taller de teatro creativo</h2>
-    <div class="mb-2">
-      <strong>Descripción:</strong>
-      <p>Invitamos a crear desde cero: personajes, situaciones y escenas. Una experiencia colectiva de creación teatral.</p>
-    </div>
-    <ul class="list-unstyled">
-      <li><strong>Precio:</strong> 90€</li>
-      <li><strong>Aforo:</strong> 15 personas</li>
-      <li><strong>Duración:</strong> 6 horas</li>
-    </ul>
-    <p class="volver-btn">Volver</p>
-    <div class="cover">
-      <img src="{% static 'images/educacion/tallerTeatro.png' %}" alt="Portada taller de teatro" class="img-fluid">
-      <button class="reveal-btn btn btn-outline-dark mt-2">Saber más</button>
-    </div>
-  </div>
-</section>
+            <ul class="list-unstyled">
+                <li><strong>Precio:</strong> {{ curso.precio }}€</li>
+                <li><strong>Aforo:</strong> {{ curso.aforo }} personas</li>
+                <li><strong>Duración:</strong> {{ curso.duracion }} horas</li>
+            </ul>
+            <p class="volver-btn">Volver</p>
+            <div class="cover">
+                {% if curso.imagen %}
+                    <img src="{{ curso.imagen.url }}" alt="Portada {{ curso.nombre }}" class="img-fluid">
+                {% else %}
+                    <p>Imagen no disponible</p>
+                {% endif %}
+                <button class="reveal-btn btn btn-outline-dark mt-2">Saber más</button>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {

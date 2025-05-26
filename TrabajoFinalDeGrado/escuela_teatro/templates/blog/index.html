@@ -3,77 +3,110 @@
 {% block head %}
 <style>
   article {
-    padding: 4rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 800px;
+    margin:  auto auto;
+    padding: 0 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
   }
 
   .principal {
-    font-size: 2.5rem;
-    font-weight: bold;
+    font-size: 2.2rem;
+    font-weight: 700;
     text-align: center;
     margin-bottom: 3rem;
-    color: #2e2e2e;
+    color: #2c6f2c; 
+    
   }
 
   .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
   }
 
   .blog-box {
-    background: #ffffff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #fafafa;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
   }
 
   .blog-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 18px rgba(44, 111, 44, 0.3);
   }
 
   .blog-box img {
     width: 100%;
-    height: 200px;
+    height: 180px;
     object-fit: cover;
+    border-bottom: 1px solid #ddd;
   }
 
   .blog-box h3 {
-    font-size: 1.5rem;
-    margin: 1rem;
-    color: #333;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 1.2rem 1.5rem 0.5rem 1.5rem;
+    color: #2c6f2c;
   }
 
   .blog-box p {
-    margin: 0 1rem 1rem;
-    color: #666;
-    line-height: 1.6;
+    margin: 0 1.5rem 1.5rem 1.5rem;
+    line-height: 1.5;
+    color: #555;
+    font-size: 1rem;
   }
 
   .blog-box a {
-    margin: 0 1rem 1.5rem;
+    margin: 0 1.5rem 1.8rem 1.5rem;
     align-self: flex-start;
-    color: #7e22ce;
-    font-weight: bold;
+    color: #2c6f2c;
+    font-weight: 600;
     text-decoration: none;
-    transition: color 0.2s ease;
+    font-size: 1rem;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease, color 0.3s ease;
   }
 
   .blog-box a:hover {
-    color: #a855f7;
-    text-decoration: underline;
+    color: #1f4e1f;
+    border-color: #1f4e1f;
+  }
+  .text-primary {
+    margin-top: 40px;
+  }
+  .section-title::after {
+    margin-top: 40px;
+  }
+  @media (max-width: 500px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+    .blog-box img {
+      height: 150px;
+    }
   }
 </style>
 {% endblock %}
-{% block content %}
-<article>
-  <h2 class="principal">Conoce nuestras últimas noticias</h2>
 
+{% block content %}
+<div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+  <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+    <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Blog</h1>
+    <div class="d-inline-flex mb-lg-5">
+      <p class="m-0 text-white"><a class="text-white" href="">Descubre nuestras últimas noticias</a></p>
+    </div>
+  </div>
+</div>
+<div class="container">
+        <div class="section-title">
+            <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Conoce nuestras últimas noticias</h4>
+        </div>
+    </div>
+<article>
   <div class="blog-grid">
     {% for post in posts %}
       <div class="blog-box">

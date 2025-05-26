@@ -22,6 +22,7 @@ urlpatterns = [
     path('administracion/<int:id>/', views.admin_dashboard, name='administracion'),
     path('administracion/<int:id>/pedidos/', views.lista_pedidos, name='lista_pedidos'),
     path('administracion/<int:id>/pedidos/<int:pedido_id>/', views.detalle_pedido, name='detalle_pedido'),
+    path('administracion/<int:id>/curso/<int:curso_id>/subir_material/', views.subir_material, name='subir_material'),
 
 
     # URLs para Contacto
