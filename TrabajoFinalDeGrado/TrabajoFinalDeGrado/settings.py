@@ -108,18 +108,15 @@ DATABASES = {
     )
 }
 
-# Static files (CSS, JS, imágenes estáticas)
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # aquí pones tus archivos estáticos locales
-]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files (archivos subidos)
-# Para usar la carpeta static también para media (temporal, no recomendado)
-MEDIA_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'escuela_teatro', 'static')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'escuela_teatro', 'static', 'media')
 
 # Configuración de sesiones
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  

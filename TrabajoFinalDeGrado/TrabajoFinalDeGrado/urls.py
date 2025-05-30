@@ -22,4 +22,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('escuela_teatro.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Carpeta en la que se guardarán las imágenes
+]# Carpeta en la que se guardarán las imágenes
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
