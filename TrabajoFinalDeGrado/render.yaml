@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: tfg
+    env: python
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+    startCommand: "gunicorn TrabajoFinalDeGrado.wsgi"
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://melanie:6CNNSgqui5ZHjrhw2q5Q5b2YJQK2ll2k@dpg-d0snp1umcj7s73f72i70-a.oregon-postgres.render.com/escuela_teatro
