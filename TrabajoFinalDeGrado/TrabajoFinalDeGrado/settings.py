@@ -163,4 +163,4 @@ DATABASES = {
 }
 
 
-ALLOWED_HOSTS = ['escuelalatara.onrender.com']
+ALLOWED_HOSTS = ['tfg-l9oc.onrender.com', 'localhost', '127.0.0.1']
