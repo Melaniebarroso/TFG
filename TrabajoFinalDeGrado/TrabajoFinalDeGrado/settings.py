@@ -10,23 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0c(eq6jtbf@rs0e^@&!py4@5w8y7p_#ba*nyajwejxnrv0@773'
-
+SECRET_KEY = 'tu-secreto-aqui'
 DEBUG = False
-
-ALLOWED_HOSTS = []
-
-# Application definition
+ALLOWED_HOSTS = ['tfg-l9oc.onrender.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -36,13 +27,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'escuela_teatro',
-    'cloudinary',
-    'cloudinary_storage',
+    # OJO: Quita cloudinary si no lo usas:
+    # 'cloudinary',
+    # 'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Añadido para subir al servidor
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # sirve static
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -50,29 +42,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-ROOT_URLCONF = 'TrabajoFinalDeGrado.urls'
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -83,12 +52,6 @@ DATABASES = {
         'PORT': '5432',      
     }
 }
-
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -117,44 +80,25 @@ USE_I18N = True
 USE_TZ = True
 TIME_ZONE = 'Europe/Madrid'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
+ROOT_URLCONF = 'TrabajoFinalDeGrado.urls'
 
-import os
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'), 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
 ]
 
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True  
-SESSION_COOKIE_AGE = 0 
-SESSION_SAVE_EVERY_REQUEST = True 
-SESSION_ENGINE = 'django.contrib.sessions.backends.db' 
-SESSION_COOKIE_AGE = 3600 #Máximo de duración de la sesión 1 hora
-
-# Guardado de imágenes
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
-#Para la automatización y envío de correos
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'melanibarroso13@gmail.com'  
-EMAIL_HOST_PASSWORD = 'ccxm opht pnug xthd'  
-CONTACT_EMAIL = 'melanibarroso13@gmail.com'
-
-import os
+# Database - deja solo la configuración con dj_database_url para producción
 import dj_database_url
 
 DATABASES = {
@@ -164,31 +108,32 @@ DATABASES = {
     )
 }
 
-
-import os
-from pathlib import Path
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-ALLOWED_HOSTS = ['tfg-l9oc.onrender.com', 'localhost', '127.0.0.1']
-
+# Static files (CSS, JS, imágenes estáticas)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'escuela_teatro', 'static')]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # aquí pones tus archivos estáticos locales
+]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  # Para servir estáticos con WhiteNoise
+# Media files (archivos subidos)
+# Para usar la carpeta static también para media (temporal, no recomendado)
+MEDIA_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'escuela_teatro', 'static')
 
-# Media files (archivos subidos por usuarios)
-# Usado Cloudinary ya que en render no carga los archivos /media
-MEDIA_URL = 'https://res.cloudinary.com/{cloud_name}/' 
+# Configuración de sesiones
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  
+SESSION_COOKIE_AGE = 3600  # 1 hora
+SESSION_SAVE_EVERY_REQUEST = True  
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
 
-DEFAULT_FILE_STORAGE = 'django_cloudinary_storage.storage.MediaCloudinaryStorage'
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'melanibarroso13@gmail.com'  
+EMAIL_HOST_PASSWORD = 'ccxm opht pnug xthd'  
+CONTACT_EMAIL = 'melanibarroso13@gmail.com'
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
-}
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
