@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -10,12 +11,17 @@
 </head>
 <body class="bg-gray-100 text-gray-900 flex h-screen">
 
-  <aside class="w-64 bg-white border-r border-gray-300 flex flex-col">
+  <button id="menu-btn" class="sm:hidden p-4 fixed top-0 left-0 z-50 bg-white border border-gray-300 rounded-r-md">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round"
+      d="M4 6h16M4 12h16M4 18h16"></path></svg>
+  </button>
+
+  <aside id="sidebar" class="w-64 bg-white border-r border-gray-300 flex flex-col fixed inset-y-0 left-0 transform -translate-x-full sm:translate-x-0 transition-transform duration-200 ease-in-out z-40 sm:static sm:flex">
     <div class="p-6 border-b border-gray-300">
       <h1 class="text-2xl font-bold">Panel de administración</h1>
       <p class="mt-1 text-sm text-gray-600">Bienvenid@, {{ admin.nombre }}</p>
     </div>
-
     <nav class="flex-grow mt-4">
       <ul>
         <li>
@@ -38,13 +44,12 @@
         </li>
       </ul>
     </nav>
-
     <footer class="p-6 border-t border-gray-300 text-center text-sm text-gray-600">
       La Tará &copy; {{ now|date:"Y" }}
     </footer>
   </aside>
 
-  <main class="flex-grow p-8 overflow-y-auto">
+    <main class="flex-grow p-8 overflow-y-auto">
 <section id="estadisticas" class="section bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto space-y-8">
   <h2 class="text-3xl font-bold mb-6 border-b border-gray-300 pb-4">Estadísticas</h2>
 
@@ -280,85 +285,89 @@
 </section>
 
   </main>
-
   <script>
-const buttons = document.querySelectorAll('aside nav button');
-const sections = document.querySelectorAll('main section.section');
+    // Script para el gráfico
+    const ctxInscripciones = document.getElementById('inscripcionesMensualesChart');
+    if (ctxInscripciones) {
+      const meses = {{ meses_inscripciones|safe }};
+      const cantidades = {{ cantidades_inscripciones|safe }};
 
-buttons.forEach(button => {
-  button.addEventListener('click', () => {
-    buttons.forEach(btn => {
-      btn.classList.remove('bg-blue-50', 'border-blue-600', 'text-black');
-      btn.classList.add('text-gray-700');
-    });
-    sections.forEach(sec => sec.classList.add('hidden'));
-
-    button.classList.add('bg-blue-50', 'border-blue-600', 'text-black');
-    const id = button.getAttribute('data-section');
-    document.getElementById(id).classList.remove('hidden');
-  });
-});
-buttons[0].click(); // mostramos la primera sección - estadísticas
-
-const cursoTabsButtons = document.querySelectorAll('.curso-tab-button');
-cursoTabsButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const parent = button.closest('div.border');
-    if (!parent) return;
-    parent.querySelectorAll('.curso-tab-content').forEach(content => content.classList.add('hidden'));
-    parent.querySelectorAll('.curso-tab-button').forEach(btn => {
-      btn.classList.remove('bg-white', 'font-bold', 'border-b-4', 'border-purple-600');
-      btn.classList.add('text-purple-600');
-    });
-
-    const targetId = button.getAttribute('data-target');
-    parent.querySelector(targetId).classList.remove('hidden');
-    button.classList.remove('text-purple-600');
-    button.classList.add('bg-white', 'font-bold', 'border-b-4', 'border-purple-600');
-  });
-});
-
-document.querySelectorAll('div.border').forEach(div => {
-  const firstTab = div.querySelector('.curso-tab-button');
-  if (firstTab) firstTab.click();
-});
-
-const ctxInscripciones = document.getElementById('inscripcionesMensualesChart');
-if (ctxInscripciones) {
-  const meses = {{ meses_inscripciones|safe }};
-  const cantidades = {{ cantidades_inscripciones|safe }};
-
-  new Chart(ctxInscripciones.getContext('2d'), {
-    type: 'bar',
-    data: {
-      labels: meses,
-      datasets: [{
-        label: 'Inscripciones',
-        data: cantidades,
-        backgroundColor: 'rgba(99, 102, 241, 0.7)',
-        borderColor: 'rgba(99, 102, 241, 1)',
-        borderWidth: 1,
-        borderRadius: 5
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-          precision: 0
+      new Chart(ctxInscripciones.getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: meses,
+          datasets: [{
+            label: 'Inscripciones',
+            data: cantidades,
+            backgroundColor: 'rgba(99, 102, 241, 0.7)',
+            borderColor: 'rgba(99, 102, 241, 1)',
+            borderWidth: 1,
+            borderRadius: 5
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              precision: 0
+            }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: { enabled: true }
+          }
         }
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: { enabled: true }
-      }
+      });
     }
-  });
-}
 
-    
+    // Menu desplegale
+    const menuBtn = document.getElementById('menu-btn');
+    const sidebar = document.getElementById('sidebar');
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+    });
+
+    const buttons = document.querySelectorAll('aside nav button');
+    const sections = document.querySelectorAll('main section.section');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        buttons.forEach(btn => {
+          btn.classList.remove('bg-blue-50', 'border-blue-600', 'text-black');
+          btn.classList.add('text-gray-700');
+        });
+        sections.forEach(sec => sec.classList.add('hidden'));
+
+        button.classList.add('bg-blue-50', 'border-blue-600', 'text-black');
+        const id = button.getAttribute('data-section');
+        document.getElementById(id).classList.remove('hidden');
+      });
+    });
+
+    buttons[0].click(); // Mostrar la primera sección al cargar (estadisticas)
+
+    const cursoTabsButtons = document.querySelectorAll('.curso-tab-button');
+    cursoTabsButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const parent = button.closest('div.border');
+        if (!parent) return;
+        parent.querySelectorAll('.curso-tab-content').forEach(content => content.classList.add('hidden'));
+        parent.querySelectorAll('.curso-tab-button').forEach(btn => {
+          btn.classList.remove('bg-white', 'font-bold', 'border-b-4', 'border-purple-600');
+          btn.classList.add('text-purple-600');
+        });
+
+        const targetId = button.getAttribute('data-target');
+        parent.querySelector(targetId).classList.remove('hidden');
+        button.classList.remove('text-purple-600');
+        button.classList.add('bg-white', 'font-bold', 'border-b-4', 'border-purple-600');
+      });
+    });
+
+    document.querySelectorAll('div.border').forEach(div => {
+      const firstTab = div.querySelector('.curso-tab-button');
+      if (firstTab) firstTab.click();
+    });
   </script>
-
 </body>
 </html>
