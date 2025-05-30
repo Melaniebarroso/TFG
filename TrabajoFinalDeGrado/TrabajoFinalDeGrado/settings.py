@@ -185,10 +185,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 # Usado Cloudinary ya que en render no carga los archivos /media
 MEDIA_URL = 'https://res.cloudinary.com/{cloud_name}/' 
 
-# Almacenamiento ahi
 DEFAULT_FILE_STORAGE = 'django_cloudinary_storage.storage.MediaCloudinaryStorage'
 
-# Variables del redner
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
