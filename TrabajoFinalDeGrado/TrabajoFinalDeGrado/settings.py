@@ -142,3 +142,12 @@ SESSION_COOKIE_AGE = 3600 #Máximo de duración de la sesión 1 hora
 # Guardado de imágenes
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+#Para la automatización y envío de correos
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'melanibarroso13@gmail.com'  
+EMAIL_HOST_PASSWORD = 'ccxm opht pnug xthd'  
+CONTACT_EMAIL = 'melanibarroso13@gmail.com'

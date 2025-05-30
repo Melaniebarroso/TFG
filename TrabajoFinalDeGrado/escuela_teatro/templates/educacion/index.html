@@ -114,18 +114,17 @@
             padding: 0.5rem;
         }
     }
+    .page-header {
+        width: 100%;
+        height: 70vh;
+        background: url('{% static "images/formacionHeader.png" %}') no-repeat center center;
+        background-size: cover;
+        background-attachment: scroll;
+    }
 </style>
-
 {% endblock %}
-
 {% block content %}
 <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
-  <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
-    <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Formación</h1>
-    <div class="d-inline-flex mb-lg-5">
-      <p class="m-0 text-white"><a class="text-white" href="">Cuesos y talleres</a></p>
-    </div>
-  </div>
 </div>
 <div class="container-fluid pt-5">
     <div class="container">
@@ -134,10 +133,17 @@
             <h1 class="display-4">APRENDE CON NOSOTROS</h1>
         </div>
     </div>
-
+    <div class="row justify-content-center mb-5" data-aos="fade-up" data-aos-easing="ease-out-back">
+    <div class="col-md-8 text-center">
+        <h3 class="fw-semibold">Aprender es transformarse</h3>
+        <p class="lead text-muted">
+        Cada curso es una puerta a nuevas emociones, habilidades y descubrimientos. ¿Te atreves a dar el paso?
+        </p>
+    </div>
+    </div>
     <section class="cursos">
         {% for curso in cursos %}
-        <div class="book">
+        <div class="book" data-aos="zoom-in-down">
             <h2 class="mb-3">{{ curso.nombre }}</h2>
             <div class="mb-2">
                 <strong>Descripción:</strong>

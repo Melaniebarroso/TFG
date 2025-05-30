@@ -151,7 +151,7 @@ class Espectaculo(models.Model):
 class ContactoNewsletter(models.Model):
     email = models.CharField(max_length=100)
     nombre = models.CharField(max_length=100)
-    fecha_suscripcion = models.DateTimeField()
+    fecha_suscripcion = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'contactos_newsletter'

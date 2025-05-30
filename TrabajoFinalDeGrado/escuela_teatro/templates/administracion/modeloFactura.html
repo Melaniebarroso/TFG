@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Factura</title>
+  <style>
+body {
+  font-family: 'Roboto', 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background-color: #f4f6f8;
+}
+
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 4px solid #0052cc;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 32px;
+  color: #0052cc;
+  margin: 0;
+}
+
+.info-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.company-info, .client-info {
+  width: 48%;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.company-info strong, .client-info strong {
+  color: #0052cc;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+table thead {
+  background-color: #0052cc;
+  color: #fff;
+}
+
+table th, table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9fafc;
+}
+
+.totals {
+  margin-top: 30px;
+  text-align: right;
+}
+
+.totals table {
+  width: 300px;
+  float: right;
+  border-collapse: collapse;
+}
+
+.totals th, .totals td {
+  padding: 8px;
+  border: none;
+  font-size: 14px;
+}
+
+.totals th {
+  text-align: left;
+  color: #555;
+}
+
+.totals .grand-total {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #0052cc;
+}
+
+.note {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 20px;
+}
+
+footer {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #777;
+}
+
+img.logo {
+  height: 50px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Factura</h1>
+        <img src="{% static 'images/logoNegro.png' %}" width="70px">
+    </header>
+
+    <div class="info-section">
+      <div class="company-info">
+        <p><strong>Cristina Graos</strong></p>
+        <p>Calle Arturo Aranguren 8, Cáceres</p>
+        <p>Teléfono: 615 67 54 32</p>
+        <p>Email: lataraclown@gmail.com</p>
+        <p>NIF: 12345678Z</p>
+      </div>
+
+      <div class="client-info">
+        <p><strong>Cliente:</strong> {{ cliente_nombre }}</p>
+        <p><strong>Dirección:</strong> {{ cliente_direccion }}</p>
+        <p><strong>NIF/CIF:</strong> {{ cliente_nif }}</p>
+        <p><strong>Email:</strong> {{ cliente_email }}</p>
+        <p><strong>Teléfono:</strong> {{ cliente_telefono }}</p>
+        <p><strong>Fecha:</strong> {{ fecha }}</p>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Descripción</th>
+          <th>Base (€)</th>
+          <th>IVA (%)</th>
+          <th>IRPF (%)</th>
+          <th>Total (€)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ concepto }}</td>
+          <td>{{ base }}</td>
+          <td>{{ iva }}</td>
+          <td>{{ irpf }}</td>
+          <td>{{ total }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="totals">
+      <table>
+        <tr>
+          <th>Base:</th>
+          <td>{{ base }} €</td>
+        </tr>
+        <tr>
+          <th>IVA ({{ iva }}%):</th>
+          <td>{{ iva_importe }} €</td>
+        </tr>
+        <tr>
+          <th>IRPF ({{ irpf }}%):</th>
+          <td>-{{ irpf_importe }} €</td>
+        </tr>
+        <tr>
+          <th class="grand-total">Total:</th>
+          <td class="grand-total">{{ total }} €</td>
+        </tr>
+      </table>
+    </div>
+
+    <footer>
+      <p>Gracias por su confianza.</p><br>La Tará
+    </footer>
+  </div>
+</body>
+</html>

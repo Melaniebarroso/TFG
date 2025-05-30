@@ -3,7 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.inicio, name='inicio'),
-    path('laTara', views.laTara, name='laTara'),
     path('blog', views.blog, name='blog'),
     path('blog/<int:pk>/', views.post_detalle, name='post_detalle'),
     path('contacto', views.contacto, name='contacto'),
@@ -20,19 +19,15 @@ urlpatterns = [
     path('login', views.login_view, name='login'),
     path('perfil/<int:user_id>/', views.perfil_view, name='perfil'),
     path('administracion/<int:id>/', views.admin_dashboard, name='administracion'),
-    path('administracion/<int:id>/pedidos/', views.lista_pedidos, name='lista_pedidos'),
+    path('administracion/<int:admin_id>/inscribir_alumno/<int:curso_id>/', views.inscribir_alumno, name='inscribir_alumno'),
     path('administracion/<int:id>/pedidos/<int:pedido_id>/', views.detalle_pedido, name='detalle_pedido'),
-    path('administracion/<int:id>/curso/<int:curso_id>/subir_material/', views.subir_material, name='subir_material'),
+    path('administracion/<int:admin_id>/curso/<int:curso_id>/subir_material/', views.subir_material, name='subir_material'),
+    path('administracion/<int:admin_id>/eliminar_inscripcion/<int:inscripcion_id>/', views.eliminar_inscripcion, name='eliminar_inscripcion'),
+    path('administracion/<int:admin_id>/eliminar_alumno/<int:alumno_id>/', views.eliminar_alumno, name='eliminar_alumno'),
 
-
-    # URLs para Contacto
-    #path('contactos/', views.ContactoListView.as_view(), name='contacto_list'),
-
-    #URLs para Login
     path("login/", views.login_view, name="login"),
-    #path("perfil/<int:id>/", views.perfil, name="perfil"),
-    #path('registro/', views.registro, name='registro'),
-    #path("login/", views.CustomLogoutView.as_view(), name="logout"),
+    path('logout/', views.CustomLogoutView.as_view(), name='logout'),
 
+    path('generar_factura_pdf/', views.generar_factura_pdf, name='generar_factura_pdf'),
 
 ]

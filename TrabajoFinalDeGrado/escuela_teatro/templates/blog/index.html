@@ -3,70 +3,100 @@
 {% block head %}
 <style>
   article {
-    max-width: 800px;
-    margin:  auto auto;
-    padding: 0 1rem;
+    max-width: 90%;
+    margin: 3rem auto 5rem auto;
+    padding: 0 1.5rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
   }
 
   .principal {
-    font-size: 2.2rem;
+    font-size: 2.6rem;
     font-weight: 700;
     text-align: center;
-    margin-bottom: 3rem;
-    color: #2c6f2c; 
-    
+    margin-bottom: 4rem;
+    color: #2c6f2c;
+    letter-spacing: 1px;
   }
 
   .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    min-width: 90vw;
+    margin: 0 auto;
   }
 
   .blog-box {
-    background: #fafafa;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    min-width: auto;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(44, 111, 44, 0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.35s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  @media (max-width: 900px) {
+    .blog-grid {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 95vw;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+      max-width: 98vw;
+    }
+
+    .blog-box img {
+      height: 160px;
+    }
   }
 
   .blog-box:hover {
-    box-shadow: 0 6px 18px rgba(44, 111, 44, 0.3);
+    box-shadow: 0 12px 28px rgba(44, 111, 44, 0.25);
+    transform: translateY(-6px);
   }
 
   .blog-box img {
     width: 100%;
-    height: 180px;
+    height: 200px;
     object-fit: cover;
     border-bottom: 1px solid #ddd;
+    transition: transform 0.4s ease;
+  }
+
+  .blog-box:hover img {
+    transform: scale(1.05);
   }
 
   .blog-box h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin: 1.2rem 1.5rem 0.5rem 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 1.5rem 1.8rem 0.8rem 1.8rem;
     color: #2c6f2c;
+    line-height: 1.2;
   }
 
   .blog-box p {
-    margin: 0 1.5rem 1.5rem 1.5rem;
-    line-height: 1.5;
+    margin: 0 1.8rem 2rem 1.8rem;
+    line-height: 1.6;
     color: #555;
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .blog-box a {
-    margin: 0 1.5rem 1.8rem 1.5rem;
+    margin: 0 1.8rem 2.2rem 1.8rem;
     align-self: flex-start;
     color: #2c6f2c;
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.1rem;
     border-bottom: 2px solid transparent;
     transition: border-color 0.3s ease, color 0.3s ease;
   }
@@ -75,50 +105,55 @@
     color: #1f4e1f;
     border-color: #1f4e1f;
   }
+
   .text-primary {
-    margin-top: 40px;
+    margin-top: 50px;
   }
+
   .section-title::after {
     margin-top: 40px;
   }
+
   @media (max-width: 500px) {
     .blog-grid {
       grid-template-columns: 1fr;
     }
+
     .blog-box img {
-      height: 150px;
+      height: 160px;
     }
+  }
+
+  .page-header {
+    width: 100%;
+    height: 60vh;
+    background: url('{% static "images/blogHeader.png" %}') no-repeat center center;
+    background-size: cover;
+    background-attachment: scroll;
   }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid page-header mb-5 position-relative overlay-bottom">
-  <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
-    <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Blog</h1>
-    <div class="d-inline-flex mb-lg-5">
-      <p class="m-0 text-white"><a class="text-white" href="">Descubre nuestras últimas noticias</a></p>
-    </div>
+<div class="container-fluid page-header mb-5 position-relative overlay-bottom"></div>
+<div class="container">
+  <div class="section-title">
+    <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Conoce nuestras últimas noticias</h4>
   </div>
 </div>
-<div class="container">
-        <div class="section-title">
-            <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Conoce nuestras últimas noticias</h4>
-        </div>
-    </div>
 <article>
   <div class="blog-grid">
     {% for post in posts %}
-      <div class="blog-box">
-        {% if post.imagen %}
-          <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}">
-        {% endif %}
-        <h3>{{ post.titulo }}</h3>
-        <p>{{ post.contenido|truncatewords:30 }}</p>
-        <a href="{% url 'post_detalle' post.pk %}">Leer más →</a>
-      </div>
+    <div class="blog-box" data-aos="zoom-in-down">
+      {% if post.imagen %}
+      <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}">
+      {% endif %}
+      <h3>{{ post.titulo }}</h3>
+      <p>{{ post.contenido|truncatewords:30 }}</p>
+      <a href="{% url 'post_detalle' post.pk %}">Leer más →</a>
+    </div>
     {% empty %}
-      <p>No hay publicaciones aún.</p>
+    <p>No hay publicaciones aún.</p>
     {% endfor %}
   </div>
 </article>
