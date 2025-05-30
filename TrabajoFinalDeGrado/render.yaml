@@ -9,3 +9,10 @@ services:
         value: postgresql://melanie:6CNNSgqui5ZHjrhw2q5Q5b2YJQK2ll2k@dpg-d0snp1umcj7s73f72i70-a.oregon-postgres.render.com/escuela_teatro
       - key: PORT
         value: "10000"
+envVars:
+  - key: CLOUDINARY_CLOUD_NAME
+    value: daetzluep
+  - key: CLOUDINARY_API_KEY
+    value: 661551849333256
+  - key: CLOUDINARY_API_SECRET
+    value: jkh2374lkj23lkj4lkj23l4kj23l4kj23l4kj

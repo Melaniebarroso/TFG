@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'escuela_teatro'
+    'escuela_teatro',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -163,15 +165,32 @@ DATABASES = {
 }
 
 
-ALLOWED_HOSTS = ['tfg-l9oc.onrender.com', 'localhost', '127.0.0.1']
+import os
+from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+ALLOWED_HOSTS = ['tfg-l9oc.onrender.com', 'localhost', '127.0.0.1']
+
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'escuela_teatro', 'static')]  
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'escuela_teatro', 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  # Para servir estáticos con WhiteNoise
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #Añadido para render
+# Media files (archivos subidos por usuarios)
+# Usado Cloudinary ya que en render no carga los archivos /media
+MEDIA_URL = 'https://res.cloudinary.com/{cloud_name}/' 
+
+# Almacenamiento ahi
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# Variables del redner
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
