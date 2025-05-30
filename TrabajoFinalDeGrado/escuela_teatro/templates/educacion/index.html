@@ -157,7 +157,7 @@
             <p class="volver-btn">Volver</p>
             <div class="cover">
                 {% if curso.imagen %}
-                    <img src="{{ curso.imagen.url }}" alt="Portada {{ curso.nombre }}" class="img-fluid">
+                    <img src="{{ curso.imagen.name }}" alt="Portada {{ curso.nombre }}" class="img-fluid">
                 {% else %}
                     <p>Imagen no disponible</p>
                 {% endif %}

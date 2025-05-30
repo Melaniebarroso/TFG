@@ -115,8 +115,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'escuela_teatro', 'static', 'media')
+MEDIA_URL = STATIC_URL + 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles', 'media') 
 
 # Configuración de sesiones
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  
