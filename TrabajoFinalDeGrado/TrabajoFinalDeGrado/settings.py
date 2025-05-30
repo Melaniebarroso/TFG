@@ -151,3 +151,11 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'melanibarroso13@gmail.com'  
 EMAIL_HOST_PASSWORD = 'ccxm opht pnug xthd'  
 CONTACT_EMAIL = 'melanibarroso13@gmail.com'
+
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.config(conn_max_age=600)
+}
+
+ALLOWED_HOSTS = ['escuelalatara.onrender.com']
