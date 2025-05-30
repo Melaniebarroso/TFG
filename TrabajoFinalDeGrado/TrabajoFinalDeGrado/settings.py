@@ -157,9 +157,10 @@ import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://Melanie:041964@localhost:5432/escuela_teatro',
+        default='postgresql://melanie:6CNNSgqui5ZHjrhw2q5Q5b2YJQK2ll2k@dpg-d0snp1umcj7s73f72i70-a.oregon-postgres.render.com/escuela_teatro',
         conn_max_age=600
     )
 }
+
 
 ALLOWED_HOSTS = ['escuelalatara.onrender.com']
