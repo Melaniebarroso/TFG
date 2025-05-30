@@ -3,7 +3,9 @@ services:
     name: tfg
     env: python
     buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
-    startCommand: "gunicorn TrabajoFinalDeGrado.wsgi"
+    startCommand: "gunicorn TrabajoFinalDeGrado.wsgi --bind 0.0.0.0:$PORT"
     envVars:
       - key: DATABASE_URL
         value: postgresql://melanie:6CNNSgqui5ZHjrhw2q5Q5b2YJQK2ll2k@dpg-d0snp1umcj7s73f72i70-a.oregon-postgres.render.com/escuela_teatro
+      - key: PORT
+        value: "10000"
