@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'escuela_teatro',
-    'cloudinary',
-    'cloudinary_storage',
+     'cloudinary',
+    'django_cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -186,7 +186,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 MEDIA_URL = 'https://res.cloudinary.com/{cloud_name}/' 
 
 # Almacenamiento ahi
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'django_cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Variables del redner
 CLOUDINARY_STORAGE = {
